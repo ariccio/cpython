@@ -49,9 +49,14 @@ extern "C" {
    performed on failure (no exception is set, no warning is printed, etc).
 */
 
+_Check_return_ _Ret_maybenull_ _Post_writable_byte_size_(size)
+_CRTALLOCATOR _CRTRESTRICT
 PyAPI_FUNC(void *) PyMem_Malloc(size_t size);
-PyAPI_FUNC(void *) PyMem_Realloc(void *ptr, size_t new_size);
-PyAPI_FUNC(void) PyMem_Free(void *ptr);
+
+_Success_(return != 0) _Check_return_ _Ret_maybenull_ _Post_writable_byte_size_(new_size)
+_CRTALLOCATOR _CRTRESTRICT
+PyAPI_FUNC(void *) PyMem_Realloc(_Pre_maybenull_ _Post_invalid_ void *ptr, _In_ _CRT_GUARDOVERFLOW size_t new_size);
+PyAPI_FUNC(void) PyMem_Free(_Pre_maybenull_ _Post_invalid_ void *ptr);
 
 /* Macros. */
 

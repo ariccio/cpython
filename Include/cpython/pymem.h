@@ -6,24 +6,38 @@
 extern "C" {
 #endif
 
+_Check_return_ _Ret_maybenull_ _Post_writable_byte_size_(size)
+_CRTALLOCATOR _CRTRESTRICT
 PyAPI_FUNC(void *) PyMem_RawMalloc(size_t size);
+
+_Check_return_ _Ret_maybenull_ _Post_writable_byte_size_((nelem* elsize))
+_CRTALLOCATOR _CRTRESTRICT
 PyAPI_FUNC(void *) PyMem_RawCalloc(size_t nelem, size_t elsize);
-PyAPI_FUNC(void *) PyMem_RawRealloc(void *ptr, size_t new_size);
-PyAPI_FUNC(void) PyMem_RawFree(void *ptr);
+
+_Success_(return != 0) _Check_return_ _Ret_maybenull_ _Post_writable_byte_size_(new_size)
+_CRTALLOCATOR _CRTRESTRICT
+PyAPI_FUNC(void *) PyMem_RawRealloc(_Pre_maybenull_ _Post_invalid_ void *ptr, _In_ _CRT_GUARDOVERFLOW size_t new_size);
+
+PyAPI_FUNC(void) PyMem_RawFree(_Pre_maybenull_ _Post_invalid_ void *ptr);
 
 /* Try to get the allocators name set by _PyMem_SetupAllocators(). */
 PyAPI_FUNC(const char*) _PyMem_GetCurrentAllocatorName(void);
 
+_Check_return_ _Ret_maybenull_ _Post_writable_byte_size_((nelem* elsize))
+_CRTALLOCATOR _CRTRESTRICT
 PyAPI_FUNC(void *) PyMem_Calloc(size_t nelem, size_t elsize);
 
 /* strdup() using PyMem_RawMalloc() */
-PyAPI_FUNC(char *) _PyMem_RawStrdup(const char *str);
+_Check_return_ _Ret_maybenull_ _Post_writable_byte_size_(_String_length_(str+1))
+PyAPI_FUNC(char *) _PyMem_RawStrdup(_In_z_ const char *str);
 
 /* strdup() using PyMem_Malloc() */
-PyAPI_FUNC(char *) _PyMem_Strdup(const char *str);
+_Check_return_ _Ret_maybenull_ _Post_writable_byte_size_(_String_length_(str+1))
+PyAPI_FUNC(char *) _PyMem_Strdup(_In_z_ const char *str);
 
 /* wcsdup() using PyMem_RawMalloc() */
-PyAPI_FUNC(wchar_t*) _PyMem_RawWcsdup(const wchar_t *str);
+_Check_return_ _Ret_maybenull_ _Post_writable_size_(_String_length_(str + 1))
+PyAPI_FUNC(wchar_t*) _PyMem_RawWcsdup(_In_z_ const wchar_t *str);
 
 
 typedef enum {
@@ -55,16 +69,20 @@ typedef struct {
     void *ctx;
 
     /* allocate a memory block */
+    
     void* (*malloc) (void *ctx, size_t size);
 
     /* allocate a memory block initialized by zeros */
+    
     void* (*calloc) (void *ctx, size_t nelem, size_t elsize);
 
     /* allocate or resize a memory block */
-    void* (*realloc) (void *ctx, void *ptr, size_t new_size);
+    
+    void * (*realloc) (void *ctx, _Pre_maybenull_ _Post_invalid_ void *ptr, _In_ _CRT_GUARDOVERFLOW size_t new_size);
 
     /* release a memory block */
-    void (*free) (void *ctx, void *ptr);
+    void (*free) (void *ctx, _Pre_maybenull_ _Post_invalid_ void *ptr);
+
 } PyMemAllocatorEx;
 
 /* Get the memory block allocator of the specified domain. */

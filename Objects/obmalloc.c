@@ -14,15 +14,34 @@ extern void _PyMem_DumpTraceback(int fd, const void *ptr);
 #define uint    unsigned int    /* assuming >= 16 bits */
 
 /* Forward declaration */
+_Check_return_ _Ret_maybenull_ _Post_writable_byte_size_(size + /*PYMEM_DEBUG_EXTRA_BYTES*/12)
+_CRTALLOCATOR _CRTRESTRICT
 static void* _PyMem_DebugRawMalloc(void *ctx, size_t size);
-static void* _PyMem_DebugRawCalloc(void *ctx, size_t nelem, size_t elsize);
-static void* _PyMem_DebugRawRealloc(void *ctx, void *ptr, size_t size);
-static void _PyMem_DebugRawFree(void *ctx, void *ptr);
 
+_Check_return_ _Ret_maybenull_ _Post_writable_byte_size_((nelem* elsize) + /*PYMEM_DEBUG_EXTRA_BYTES*/12)
+_CRTALLOCATOR _CRTRESTRICT
+static void* _PyMem_DebugRawCalloc(void *ctx, size_t nelem, size_t elsize);
+
+_Success_(return != 0) _Check_return_ _Ret_maybenull_ _Post_writable_byte_size_(size + /*PYMEM_DEBUG_EXTRA_BYTES*/12)
+_CRTALLOCATOR _CRTRESTRICT
+static void* _PyMem_DebugRawRealloc(void *ctx, _Pre_maybenull_ _Post_invalid_ void *ptr, size_t size);
+
+
+static void _PyMem_DebugRawFree(void *ctx, _Pre_maybenull_ _Post_invalid_ void *ptr);
+
+_Check_return_ _Ret_maybenull_ _Post_writable_byte_size_(size + /*PYMEM_DEBUG_EXTRA_BYTES*/12)
+_CRTALLOCATOR _CRTRESTRICT
 static void* _PyMem_DebugMalloc(void *ctx, size_t size);
+
+_Check_return_ _Ret_maybenull_ _Post_writable_byte_size_((nelem * elsize) + /*PYMEM_DEBUG_EXTRA_BYTES*/12)
+_CRTALLOCATOR _CRTRESTRICT
 static void* _PyMem_DebugCalloc(void *ctx, size_t nelem, size_t elsize);
+
+_Success_(return != 0) _Check_return_ _Ret_maybenull_ _Post_writable_byte_size_(size + /*PYMEM_DEBUG_EXTRA_BYTES*/12)
+_CRTALLOCATOR _CRTRESTRICT
 static void* _PyMem_DebugRealloc(void *ctx, void *ptr, size_t size);
-static void _PyMem_DebugFree(void *ctx, void *p);
+
+static void _PyMem_DebugFree(void *ctx, _Pre_maybenull_ _Post_invalid_ void *p);
 
 static void _PyObject_DebugDumpAddress(const void *p);
 static void _PyMem_DebugCheckAddress(const char *func, char api_id, const void *p);
@@ -74,10 +93,19 @@ static void _PyMem_SetupDebugHooksDomain(PyMemAllocatorDomain domain);
 #endif
 
 /* Forward declaration */
+_Check_return_ _Ret_maybenull_ _Post_writable_byte_size_(size)
+_CRTALLOCATOR _CRTRESTRICT
 static void* _PyObject_Malloc(void *ctx, size_t size);
-static void* _PyObject_Calloc(void *ctx, size_t nelem, size_t elsize);
-static void _PyObject_Free(void *ctx, void *p);
-static void* _PyObject_Realloc(void *ctx, void *ptr, size_t size);
+
+_Check_return_ _Ret_maybenull_ _Post_writable_byte_size_(nelem * elsize)
+_CRTALLOCATOR _CRTRESTRICT
+static void* _PyObject_Calloc(void *ctx, _In_ size_t nelem, _In_ size_t elsize);
+
+static void _PyObject_Free(void *ctx, _Pre_maybenull_ _Post_invalid_ void *p);
+
+_Success_(return != 0) _Check_return_ _Ret_maybenull_ _Post_writable_byte_size_(size)
+_CRTALLOCATOR _CRTRESTRICT
+static void* _PyObject_Realloc(void *ctx, _Pre_maybenull_ _Post_invalid_ void *ptr, _In_ _CRT_GUARDOVERFLOW size_t size);
 #endif
 
 
@@ -87,6 +115,8 @@ static void* _PyObject_Realloc(void *ctx, void *ptr, size_t size);
 struct _PyTraceMalloc_Config _Py_tracemalloc_config = _PyTraceMalloc_Config_INIT;
 
 
+_Check_return_ _Ret_maybenull_ _Post_writable_byte_size_(size)
+_CRTALLOCATOR _CRTRESTRICT
 static void *
 _PyMem_RawMalloc(void *ctx, size_t size)
 {
@@ -99,6 +129,8 @@ _PyMem_RawMalloc(void *ctx, size_t size)
     return malloc(size);
 }
 
+_Check_return_ _Ret_maybenull_ _Post_writable_byte_size_(nelem* elsize)
+_CRTALLOCATOR _CRTRESTRICT
 static void *
 _PyMem_RawCalloc(void *ctx, size_t nelem, size_t elsize)
 {
@@ -113,8 +145,10 @@ _PyMem_RawCalloc(void *ctx, size_t nelem, size_t elsize)
     return calloc(nelem, elsize);
 }
 
+_Success_(return != 0) _Check_return_ _Ret_maybenull_ _Post_writable_byte_size_(size)
+_CRTALLOCATOR _CRTRESTRICT
 static void *
-_PyMem_RawRealloc(void *ctx, void *ptr, size_t size)
+_PyMem_RawRealloc(void *ctx, _Pre_maybenull_ _Post_invalid_ void *ptr, _In_ _CRT_GUARDOVERFLOW size_t size)
 {
     if (size == 0)
         size = 1;
@@ -122,7 +156,7 @@ _PyMem_RawRealloc(void *ctx, void *ptr, size_t size)
 }
 
 static void
-_PyMem_RawFree(void *ctx, void *ptr)
+_PyMem_RawFree(void *ctx, _Pre_maybenull_ _Post_invalid_ void *ptr)
 {
     free(ptr);
 }
@@ -558,6 +592,7 @@ PyObject_SetArenaAllocator(PyObjectArenaAllocator *allocator)
     _PyObject_Arena = *allocator;
 }
 
+_Use_decl_annotations_
 void *
 PyMem_RawMalloc(size_t size)
 {
@@ -572,6 +607,7 @@ PyMem_RawMalloc(size_t size)
     return _PyMem_Raw.malloc(_PyMem_Raw.ctx, size);
 }
 
+_Use_decl_annotations_
 void *
 PyMem_RawCalloc(size_t nelem, size_t elsize)
 {
@@ -581,6 +617,7 @@ PyMem_RawCalloc(size_t nelem, size_t elsize)
     return _PyMem_Raw.calloc(_PyMem_Raw.ctx, nelem, elsize);
 }
 
+_Use_decl_annotations_
 void*
 PyMem_RawRealloc(void *ptr, size_t new_size)
 {
@@ -590,12 +627,13 @@ PyMem_RawRealloc(void *ptr, size_t new_size)
     return _PyMem_Raw.realloc(_PyMem_Raw.ctx, ptr, new_size);
 }
 
+_Use_decl_annotations_
 void PyMem_RawFree(void *ptr)
 {
     _PyMem_Raw.free(_PyMem_Raw.ctx, ptr);
 }
 
-
+_Use_decl_annotations_
 void *
 PyMem_Malloc(size_t size)
 {
@@ -605,6 +643,7 @@ PyMem_Malloc(size_t size)
     return _PyMem.malloc(_PyMem.ctx, size);
 }
 
+_Use_decl_annotations_
 void *
 PyMem_Calloc(size_t nelem, size_t elsize)
 {
@@ -614,6 +653,7 @@ PyMem_Calloc(size_t nelem, size_t elsize)
     return _PyMem.calloc(_PyMem.ctx, nelem, elsize);
 }
 
+_Use_decl_annotations_
 void *
 PyMem_Realloc(void *ptr, size_t new_size)
 {
@@ -623,6 +663,7 @@ PyMem_Realloc(void *ptr, size_t new_size)
     return _PyMem.realloc(_PyMem.ctx, ptr, new_size);
 }
 
+_Use_decl_annotations_
 void
 PyMem_Free(void *ptr)
 {
@@ -630,6 +671,7 @@ PyMem_Free(void *ptr)
 }
 
 
+_Use_decl_annotations_
 wchar_t*
 _PyMem_RawWcsdup(const wchar_t *str)
 {
@@ -650,6 +692,7 @@ _PyMem_RawWcsdup(const wchar_t *str)
     return str2;
 }
 
+_Use_decl_annotations_
 char *
 _PyMem_RawStrdup(const char *str)
 {
@@ -663,6 +706,7 @@ _PyMem_RawStrdup(const char *str)
     return copy;
 }
 
+_Use_decl_annotations_
 char *
 _PyMem_Strdup(const char *str)
 {
@@ -676,6 +720,8 @@ _PyMem_Strdup(const char *str)
     return copy;
 }
 
+
+_Use_decl_annotations_
 void *
 PyObject_Malloc(size_t size)
 {
@@ -685,6 +731,7 @@ PyObject_Malloc(size_t size)
     return _PyObject.malloc(_PyObject.ctx, size);
 }
 
+_Use_decl_annotations_
 void *
 PyObject_Calloc(size_t nelem, size_t elsize)
 {
@@ -694,6 +741,7 @@ PyObject_Calloc(size_t nelem, size_t elsize)
     return _PyObject.calloc(_PyObject.ctx, nelem, elsize);
 }
 
+_Use_decl_annotations_
 void *
 PyObject_Realloc(void *ptr, size_t new_size)
 {
@@ -703,6 +751,7 @@ PyObject_Realloc(void *ptr, size_t new_size)
     return _PyObject.realloc(_PyObject.ctx, ptr, new_size);
 }
 
+_Use_decl_annotations_
 void
 PyObject_Free(void *ptr)
 {
@@ -1177,6 +1226,7 @@ nfp free pools in usable_arenas.
 */
 
 /* Array of objects used to track chunks of memory (arenas). */
+_Writable_elements_(maxarenas)
 static struct arena_object* arenas = NULL;
 /* Number of slots currently allocated in the `arenas` vector. */
 static uint maxarenas = 0;
@@ -1586,6 +1636,8 @@ allocate_from_new_pool(uint size)
    requests, on error in the code below (as a last chance to serve the request)
    or when the max memory limit has been reached.
 */
+_Check_return_ _Ret_maybenull_ _Post_writable_byte_size_(nbytes)
+_CRTALLOCATOR _CRTRESTRICT
 static inline void*
 pymalloc_alloc(void *ctx, size_t nbytes)
 {
@@ -1634,6 +1686,7 @@ pymalloc_alloc(void *ctx, size_t nbytes)
 }
 
 
+_Use_decl_annotations_
 static void *
 _PyObject_Malloc(void *ctx, size_t nbytes)
 {
@@ -1649,7 +1702,7 @@ _PyObject_Malloc(void *ctx, size_t nbytes)
     return ptr;
 }
 
-
+_Use_decl_annotations_
 static void *
 _PyObject_Calloc(void *ctx, size_t nelem, size_t elsize)
 {
@@ -1852,7 +1905,7 @@ insert_to_freepool(poolp pool)
    Return 1 if it was freed.
    Return 0 if the block was not allocated by pymalloc_alloc(). */
 static inline int
-pymalloc_free(void *ctx, void *p)
+pymalloc_free(void *ctx, _Pre_maybenull_ _Post_invalid_ void *p)
 {
     assert(p != NULL);
 
@@ -1908,9 +1961,9 @@ pymalloc_free(void *ctx, void *p)
     return 1;
 }
 
-
+_Use_decl_annotations_
 static void
-_PyObject_Free(void *ctx, void *p)
+_PyObject_Free(void *ctx, _Pre_maybenull_ _Post_invalid_ void *p)
 {
     /* PyObject_Free(NULL) has no effect */
     if (p == NULL) {
@@ -1994,7 +2047,7 @@ pymalloc_realloc(void *ctx, void **newptr_p, void *p, size_t nbytes)
     return 1;
 }
 
-
+_Use_decl_annotations_
 static void *
 _PyObject_Realloc(void *ctx, void *ptr, size_t nbytes)
 {
@@ -2112,6 +2165,7 @@ If PYMEM_DEBUG_SERIALNO is not defined (default), the debug malloc only asks
 for 3 * S extra bytes, and omits the last serialno field.
 */
 
+_Check_return_ _Ret_maybenull_ _Post_writable_byte_size_(nbytes + PYMEM_DEBUG_EXTRA_BYTES)
 static void *
 _PyMem_DebugRawAlloc(int use_calloc, void *ctx, size_t nbytes)
 {
@@ -2172,12 +2226,14 @@ _PyMem_DebugRawAlloc(int use_calloc, void *ctx, size_t nbytes)
     return data;
 }
 
+_Use_decl_annotations_
 static void *
 _PyMem_DebugRawMalloc(void *ctx, size_t nbytes)
 {
     return _PyMem_DebugRawAlloc(0, ctx, nbytes);
 }
 
+_Use_decl_annotations_
 static void *
 _PyMem_DebugRawCalloc(void *ctx, size_t nelem, size_t elsize)
 {
@@ -2193,6 +2249,7 @@ _PyMem_DebugRawCalloc(void *ctx, size_t nelem, size_t elsize)
    Then fills the original bytes with PYMEM_DEADBYTE.
    Then calls the underlying free.
 */
+_Use_decl_annotations_
 static void
 _PyMem_DebugRawFree(void *ctx, void *p)
 {
@@ -2213,6 +2270,7 @@ _PyMem_DebugRawFree(void *ctx, void *p)
 }
 
 
+_Use_decl_annotations_
 static void *
 _PyMem_DebugRawRealloc(void *ctx, void *p, size_t nbytes)
 {
@@ -2323,6 +2381,7 @@ _PyMem_DebugCheckGIL(const char *func)
     }
 }
 
+_Use_decl_annotations_
 static void *
 _PyMem_DebugMalloc(void *ctx, size_t nbytes)
 {
@@ -2330,6 +2389,7 @@ _PyMem_DebugMalloc(void *ctx, size_t nbytes)
     return _PyMem_DebugRawMalloc(ctx, nbytes);
 }
 
+_Use_decl_annotations_
 static void *
 _PyMem_DebugCalloc(void *ctx, size_t nelem, size_t elsize)
 {
@@ -2337,7 +2397,7 @@ _PyMem_DebugCalloc(void *ctx, size_t nelem, size_t elsize)
     return _PyMem_DebugRawCalloc(ctx, nelem, elsize);
 }
 
-
+_Use_decl_annotations_
 static void
 _PyMem_DebugFree(void *ctx, void *ptr)
 {
@@ -2345,7 +2405,7 @@ _PyMem_DebugFree(void *ctx, void *ptr)
     _PyMem_DebugRawFree(ctx, ptr);
 }
 
-
+_Use_decl_annotations_
 static void *
 _PyMem_DebugRealloc(void *ctx, void *ptr, size_t nbytes)
 {

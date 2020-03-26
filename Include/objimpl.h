@@ -94,12 +94,19 @@ PyObject_{New, NewVar, Del}.
    the object gets initialized via PyObject_{Init, InitVar} after obtaining
    the raw memory.
 */
+_Check_return_ _Ret_maybenull_ _Post_writable_byte_size_(size)
+_CRTALLOCATOR _CRTRESTRICT
 PyAPI_FUNC(void *) PyObject_Malloc(size_t size);
+
 #if !defined(Py_LIMITED_API) || Py_LIMITED_API+0 >= 0x03050000
+_Check_return_ _Ret_maybenull_ _Post_writable_byte_size_(nelem* elsize)
 PyAPI_FUNC(void *) PyObject_Calloc(size_t nelem, size_t elsize);
 #endif
-PyAPI_FUNC(void *) PyObject_Realloc(void *ptr, size_t new_size);
-PyAPI_FUNC(void) PyObject_Free(void *ptr);
+
+_Success_(return != 0) _Check_return_ _Ret_maybenull_ _Post_writable_byte_size_(new_size)
+_CRTALLOCATOR _CRTRESTRICT
+PyAPI_FUNC(void *) PyObject_Realloc(_Pre_maybenull_ _Post_invalid_ void *ptr, _In_ _CRT_GUARDOVERFLOW size_t new_size);
+PyAPI_FUNC(void) PyObject_Free(_Pre_maybenull_ _Post_invalid_ void *ptr);
 
 
 /* Macros */
