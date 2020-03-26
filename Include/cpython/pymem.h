@@ -17,11 +17,11 @@ PyAPI_FUNC(void *) PyMem_RawCalloc(size_t nelem, size_t elsize);
 _Success_(return != 0) _Check_return_ _Ret_maybenull_ _Post_writable_byte_size_(new_size)
 _CRTALLOCATOR _CRTRESTRICT
 PyAPI_FUNC(void *) PyMem_RawRealloc(_Pre_maybenull_
-    _When_(return != 0, _Post_invalid_)
-    _When_(return == 0, _Post_equal_to_(_Old_(ptr)))
+    _When_(return != 0, _Post_invalid_ _Post_ptr_invalid_)
+    _When_(return == 0, _Post_equal_to_(_Old_(ptr)) _Const_)
     void *ptr, _In_ _CRT_GUARDOVERFLOW size_t new_size);
 
-PyAPI_FUNC(void) PyMem_RawFree(_Pre_maybenull_ _Post_invalid_ void *ptr);
+PyAPI_FUNC(void) PyMem_RawFree(_Pre_maybenull_ _Post_invalid_ _Post_ptr_invalid_ void *ptr);
 
 /* Try to get the allocators name set by _PyMem_SetupAllocators(). */
 PyAPI_FUNC(const char*) _PyMem_GetCurrentAllocatorName(void);
@@ -31,15 +31,15 @@ _CRTALLOCATOR _CRTRESTRICT
 PyAPI_FUNC(void *) PyMem_Calloc(size_t nelem, size_t elsize);
 
 /* strdup() using PyMem_RawMalloc() */
-_Check_return_ _Ret_maybenull_ _Post_writable_byte_size_(_String_length_(str+1))
+_Check_return_ _Ret_maybenull_z_ _Post_writable_byte_size_(_String_length_(str+1))
 PyAPI_FUNC(char *) _PyMem_RawStrdup(_In_z_ const char *str);
 
 /* strdup() using PyMem_Malloc() */
-_Check_return_ _Ret_maybenull_ _Post_writable_byte_size_(_String_length_(str+1))
+_Check_return_ _Ret_maybenull_z_ _Post_writable_byte_size_(_String_length_(str+1))
 PyAPI_FUNC(char *) _PyMem_Strdup(_In_z_ const char *str);
 
 /* wcsdup() using PyMem_RawMalloc() */
-_Check_return_ _Ret_maybenull_ _Post_writable_size_(_String_length_(str + 1))
+_Check_return_ _Ret_maybenull_z_ _Post_writable_size_(_String_length_(str + 1))
 PyAPI_FUNC(wchar_t*) _PyMem_RawWcsdup(_In_z_ const wchar_t *str);
 
 
@@ -82,12 +82,12 @@ typedef struct {
     /* allocate or resize a memory block */
     
     void * (*realloc) (void *ctx, _Pre_maybenull_
-        _When_(return != 0, _Post_invalid_)
-        _When_(return == 0, _Post_equal_to_(_Old_(ptr)))
+        _When_(return != 0, _Post_invalid_ _Post_ptr_invalid_)
+        _When_(return == 0, _Post_equal_to_(_Old_(ptr)) _Const_)
         void *ptr, _In_ _CRT_GUARDOVERFLOW size_t new_size);
 
     /* release a memory block */
-    void (*free) (void *ctx, _Pre_maybenull_ _Post_invalid_ void *ptr);
+    void (*free) (void *ctx, _Pre_maybenull_ _Post_invalid_ _Post_ptr_invalid_ void *ptr);
 
 } PyMemAllocatorEx;
 
