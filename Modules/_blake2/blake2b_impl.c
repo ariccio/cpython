@@ -381,7 +381,7 @@ static PyGetSetDef py_blake2b_getsetters[] = {
 
 
 static void
-py_blake2b_dealloc(PyObject *self)
+py_blake2b_dealloc(_In_ _Post_invalid_ _Post_ptr_invalid_ PyObject *self)
 {
     BLAKE2bObject *obj = (BLAKE2bObject *)self;
 

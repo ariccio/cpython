@@ -31,7 +31,7 @@ typedef struct {
 } parser_state;
 
 parser_state *PyParser_New(grammar *g, int start);
-void PyParser_Delete(parser_state *ps);
+void PyParser_Delete(_In_ _Post_invalid_ _Post_ptr_invalid_  _At_(ps->p_tree, _In_ _Post_invalid_ _Post_ptr_invalid_) parser_state *ps);
 int PyParser_AddToken(parser_state *ps, int type, char *str,
                       int lineno, int col_offset,
                       int end_lineno, int end_col_offset,

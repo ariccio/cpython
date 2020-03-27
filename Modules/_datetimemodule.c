@@ -3731,7 +3731,7 @@ timezone_new(PyTypeObject *type, PyObject *args, PyObject *kw)
 }
 
 static void
-timezone_dealloc(PyDateTime_TimeZone *self)
+timezone_dealloc(_In_ _Post_invalid_ _Post_ptr_invalid_ PyDateTime_TimeZone *self)
 {
     Py_CLEAR(self->offset);
     Py_CLEAR(self->name);
@@ -4111,7 +4111,7 @@ time_new(PyTypeObject *type, PyObject *args, PyObject *kw)
  */
 
 static void
-time_dealloc(PyDateTime_Time *self)
+time_dealloc(_In_ _Post_invalid_ _Post_ptr_invalid_ PyDateTime_Time *self)
 {
     if (HASTZINFO(self)) {
         Py_XDECREF(self->tzinfo);
@@ -5190,7 +5190,7 @@ error:
  */
 
 static void
-datetime_dealloc(PyDateTime_DateTime *self)
+datetime_dealloc(_In_ _Post_invalid_ _Post_ptr_invalid_ PyDateTime_DateTime *self)
 {
     if (HASTZINFO(self)) {
         Py_XDECREF(self->tzinfo);

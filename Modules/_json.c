@@ -81,13 +81,13 @@ _build_rval_index_tuple(PyObject *rval, Py_ssize_t idx);
 static PyObject *
 scanner_new(PyTypeObject *type, PyObject *args, PyObject *kwds);
 static void
-scanner_dealloc(PyObject *self);
+scanner_dealloc(_In_ _Post_invalid_ _Post_ptr_invalid_ PyObject *self);
 static int
 scanner_clear(PyObject *self);
 static PyObject *
 encoder_new(PyTypeObject *type, PyObject *args, PyObject *kwds);
 static void
-encoder_dealloc(PyObject *self);
+encoder_dealloc(_In_ _Post_invalid_ _Post_ptr_invalid_ PyObject *self);
 static int
 encoder_clear(PyObject *self);
 static int
@@ -628,7 +628,7 @@ py_encode_basestring(PyObject* Py_UNUSED(self), PyObject *pystr)
 }
 
 static void
-scanner_dealloc(PyObject *self)
+scanner_dealloc(_In_ _Post_invalid_ _Post_ptr_invalid_ PyObject *self)
 {
     /* bpo-31095: UnTrack is needed before calling any callbacks */
     PyObject_GC_UnTrack(self);
@@ -1760,7 +1760,7 @@ bail:
 }
 
 static void
-encoder_dealloc(PyObject *self)
+encoder_dealloc(_In_ _Post_invalid_ _Post_ptr_invalid_ PyObject *self)
 {
     /* bpo-31095: UnTrack is needed before calling any callbacks */
     PyObject_GC_UnTrack(self);

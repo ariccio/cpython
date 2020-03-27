@@ -34,7 +34,7 @@ extern "C" {
      XXX an exception is not set in that case).
   */
   PyAPI_FUNC(PyArena *) PyArena_New(void);
-  PyAPI_FUNC(void) PyArena_Free(PyArena *);
+  PyAPI_FUNC(void) PyArena_Free(_In_ _Post_invalid_ _Post_ptr_invalid_ PyArena *);
 
   /* Mostly like malloc(), return the address of a block of memory spanning
    * `size` bytes, or return NULL (without setting an exception) if enough

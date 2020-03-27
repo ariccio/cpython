@@ -94,7 +94,7 @@ PyParser_New(grammar *g, int start)
 }
 
 void
-PyParser_Delete(parser_state *ps)
+PyParser_Delete(_In_ _Post_invalid_ _Post_ptr_invalid_  _At_(ps->p_tree, _In_ _Post_invalid_ _Post_ptr_invalid_ ) parser_state *ps)
 {
     /* NB If you want to save the parse tree,
        you must set p_tree to NULL before calling delparser! */

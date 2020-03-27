@@ -163,7 +163,7 @@ These are exactly the valid indices for a list of 4 elements.\n\
 When step is given, it specifies the increment (or decrement).");
 
 static void
-range_dealloc(rangeobject *r)
+range_dealloc(_In_ _Post_invalid_ _Post_ptr_invalid_ rangeobject *r)
 {
     Py_DECREF(r->start);
     Py_DECREF(r->stop);
@@ -993,7 +993,7 @@ static PyMethodDef longrangeiter_methods[] = {
 };
 
 static void
-longrangeiter_dealloc(longrangeiterobject *r)
+longrangeiter_dealloc(_In_ _Post_invalid_ _Post_ptr_invalid_ longrangeiterobject *r)
 {
     Py_XDECREF(r->index);
     Py_XDECREF(r->start);

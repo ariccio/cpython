@@ -51,7 +51,7 @@ fail:
 }
 
 VOID
-FreeNonRecursiveMutex(PNRMUTEX mutex)
+FreeNonRecursiveMutex(_In_ _Post_invalid_ _Post_ptr_invalid_ PNRMUTEX mutex)
 {
     if (mutex) {
         PyCOND_FINI(&mutex->cv);
@@ -281,7 +281,7 @@ PyThread_allocate_lock(void)
 }
 
 void
-PyThread_free_lock(PyThread_type_lock aLock)
+PyThread_free_lock(_Post_invalid_ _Post_ptr_invalid_ PyThread_type_lock aLock)
 {
     dprintf(("%lu: PyThread_free_lock(%p) called\n", PyThread_get_thread_ident(),aLock));
 

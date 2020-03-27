@@ -99,7 +99,7 @@ itertools_groupby_impl(PyTypeObject *type, PyObject *it, PyObject *keyfunc)
 }
 
 static void
-groupby_dealloc(groupbyobject *gbo)
+groupby_dealloc(_In_ _Post_invalid_ _Post_ptr_invalid_ groupbyobject *gbo)
 {
     PyObject_GC_UnTrack(gbo);
     Py_XDECREF(gbo->it);
@@ -994,7 +994,7 @@ itertools_cycle_impl(PyTypeObject *type, PyObject *iterable)
 }
 
 static void
-cycle_dealloc(cycleobject *lz)
+cycle_dealloc(_In_ _Post_invalid_ _Post_ptr_invalid_ cycleobject *lz)
 {
     PyObject_GC_UnTrack(lz);
     Py_XDECREF(lz->it);
@@ -1187,7 +1187,7 @@ itertools_dropwhile_impl(PyTypeObject *type, PyObject *func, PyObject *seq)
 }
 
 static void
-dropwhile_dealloc(dropwhileobject *lz)
+dropwhile_dealloc(_In_ _Post_invalid_ _Post_ptr_invalid_ dropwhileobject *lz)
 {
     PyObject_GC_UnTrack(lz);
     Py_XDECREF(lz->func);
@@ -1352,7 +1352,7 @@ itertools_takewhile_impl(PyTypeObject *type, PyObject *func, PyObject *seq)
 }
 
 static void
-takewhile_dealloc(takewhileobject *lz)
+takewhile_dealloc(_In_ _Post_invalid_ _Post_ptr_invalid_ takewhileobject *lz)
 {
     PyObject_GC_UnTrack(lz);
     Py_XDECREF(lz->func);
@@ -1565,7 +1565,7 @@ islice_new(PyTypeObject *type, PyObject *args, PyObject *kwds)
 }
 
 static void
-islice_dealloc(isliceobject *lz)
+islice_dealloc(_In_ _Post_invalid_ _Post_ptr_invalid_ isliceobject *lz)
 {
     PyObject_GC_UnTrack(lz);
     Py_XDECREF(lz->it);
@@ -1771,7 +1771,7 @@ itertools_starmap_impl(PyTypeObject *type, PyObject *func, PyObject *seq)
 }
 
 static void
-starmap_dealloc(starmapobject *lz)
+starmap_dealloc(_In_ _Post_invalid_ _Post_ptr_invalid_ starmapobject *lz)
 {
     PyObject_GC_UnTrack(lz);
     Py_XDECREF(lz->func);
@@ -1930,7 +1930,7 @@ itertools_chain_from_iterable(PyTypeObject *type, PyObject *arg)
 }
 
 static void
-chain_dealloc(chainobject *lz)
+chain_dealloc(_In_ _Post_invalid_ _Post_ptr_invalid_ chainobject *lz)
 {
     PyObject_GC_UnTrack(lz);
     Py_XDECREF(lz->active);
@@ -2184,7 +2184,7 @@ error:
 }
 
 static void
-product_dealloc(productobject *lz)
+product_dealloc(_In_ _Post_invalid_ _Post_ptr_invalid_ _At_(lz->indices, _In_ _Post_invalid_ _Post_ptr_invalid_ ) productobject *lz)
 {
     PyObject_GC_UnTrack(lz);
     Py_XDECREF(lz->pools);
@@ -2515,7 +2515,7 @@ error:
 }
 
 static void
-combinations_dealloc(combinationsobject *co)
+combinations_dealloc(_In_ _Post_invalid_ _Post_ptr_invalid_ _At_(co->indices, _In_ _Post_invalid_ _Post_ptr_invalid_ ) combinationsobject *co)
 {
     PyObject_GC_UnTrack(co);
     Py_XDECREF(co->pool);
@@ -2849,7 +2849,7 @@ error:
 }
 
 static void
-cwr_dealloc(cwrobject *co)
+cwr_dealloc(_In_ _Post_invalid_ _Post_ptr_invalid_ _At_(co->indices, _In_ _Post_invalid_ _Post_ptr_invalid_ ) cwrobject *co)
 {
     PyObject_GC_UnTrack(co);
     Py_XDECREF(co->pool);
@@ -3192,7 +3192,7 @@ error:
 }
 
 static void
-permutations_dealloc(permutationsobject *po)
+permutations_dealloc(_In_ _Post_invalid_ _Post_ptr_invalid_ _At_(po->indices, _In_ _Post_invalid_ _Post_ptr_invalid_ ) _At_(po->cycles, _In_ _Post_invalid_ _Post_ptr_invalid_ ) permutationsobject *po)
 {
     PyObject_GC_UnTrack(po);
     Py_XDECREF(po->pool);
@@ -3516,7 +3516,7 @@ itertools_accumulate_impl(PyTypeObject *type, PyObject *iterable,
 }
 
 static void
-accumulate_dealloc(accumulateobject *lz)
+accumulate_dealloc(_In_ _Post_invalid_ _Post_ptr_invalid_ accumulateobject *lz)
 {
     PyObject_GC_UnTrack(lz);
     Py_XDECREF(lz->binop);
@@ -3727,7 +3727,7 @@ fail:
 }
 
 static void
-compress_dealloc(compressobject *lz)
+compress_dealloc(_In_ _Post_invalid_ _Post_ptr_invalid_ compressobject *lz)
 {
     PyObject_GC_UnTrack(lz);
     Py_XDECREF(lz->data);
@@ -3884,7 +3884,7 @@ itertools_filterfalse_impl(PyTypeObject *type, PyObject *func, PyObject *seq)
 }
 
 static void
-filterfalse_dealloc(filterfalseobject *lz)
+filterfalse_dealloc(_In_ _Post_invalid_ _Post_ptr_invalid_ filterfalseobject *lz)
 {
     PyObject_GC_UnTrack(lz);
     Py_XDECREF(lz->func);
@@ -4112,7 +4112,7 @@ itertools_count_impl(PyTypeObject *type, PyObject *long_cnt,
 }
 
 static void
-count_dealloc(countobject *lz)
+count_dealloc(_In_ _Post_invalid_ _Post_ptr_invalid_ countobject *lz)
 {
     PyObject_GC_UnTrack(lz);
     Py_XDECREF(lz->long_cnt);
@@ -4279,7 +4279,7 @@ repeat_new(PyTypeObject *type, PyObject *args, PyObject *kwds)
 }
 
 static void
-repeat_dealloc(repeatobject *ro)
+repeat_dealloc(_In_ _Post_invalid_ _Post_ptr_invalid_ repeatobject *ro)
 {
     PyObject_GC_UnTrack(ro);
     Py_XDECREF(ro->element);
@@ -4480,7 +4480,7 @@ zip_longest_new(PyTypeObject *type, PyObject *args, PyObject *kwds)
 }
 
 static void
-zip_longest_dealloc(ziplongestobject *lz)
+zip_longest_dealloc(_In_ _Post_invalid_ _Post_ptr_invalid_ ziplongestobject *lz)
 {
     PyObject_GC_UnTrack(lz);
     Py_XDECREF(lz->ittuple);

@@ -54,7 +54,7 @@ typedef struct _Py_Identifier {
 
 /* buffer interface */
 typedef struct bufferinfo {
-    void *buf;
+    _Field_size_(len) void *buf;
     PyObject *obj;        /* owned reference */
     Py_ssize_t len;
     Py_ssize_t itemsize;  /* This is Py_ssize_t so it can be

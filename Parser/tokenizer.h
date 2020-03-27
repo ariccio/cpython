@@ -77,7 +77,7 @@ extern struct tok_state *PyTokenizer_FromString(const char *, int);
 extern struct tok_state *PyTokenizer_FromUTF8(const char *, int);
 extern struct tok_state *PyTokenizer_FromFile(FILE *, const char*,
                                               const char *, const char *);
-extern void PyTokenizer_Free(struct tok_state *);
+extern void PyTokenizer_Free(_In_ _Post_invalid_ _Post_ptr_invalid_  _At_(tok->encoding, _Post_invalid_ _Post_ptr_invalid_) _At_(tok->buf, _Post_invalid_ _Post_ptr_invalid_) _At_(tok->input, _Post_invalid_ _Post_ptr_invalid_) struct tok_state * tok);
 extern int PyTokenizer_Get(struct tok_state *, const char **, const char **);
 
 #define tok_dump _Py_tok_dump

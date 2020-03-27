@@ -331,7 +331,7 @@ newMD5object(void)
 /* Internal methods for a hash object */
 
 static void
-MD5_dealloc(PyObject *ptr)
+MD5_dealloc(_In_ _Post_invalid_ _Post_ptr_invalid_ PyObject *ptr)
 {
     PyObject_Del(ptr);
 }

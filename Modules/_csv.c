@@ -315,7 +315,7 @@ static PyGetSetDef Dialect_getsetlist[] = {
 };
 
 static void
-Dialect_dealloc(DialectObj *self)
+Dialect_dealloc(_In_ _Post_invalid_ _Post_ptr_invalid_ DialectObj *self)
 {
     Py_XDECREF(self->lineterminator);
     Py_TYPE(self)->tp_free((PyObject *)self);
@@ -853,7 +853,7 @@ err:
 }
 
 static void
-Reader_dealloc(ReaderObj *self)
+Reader_dealloc(_In_ _Post_invalid_ _Post_ptr_invalid_  _At_(self->field, _In_ _Post_invalid_ _Post_ptr_invalid_ ) ReaderObj *self)
 {
     PyObject_GC_UnTrack(self);
     Py_XDECREF(self->dialect);
@@ -1298,7 +1298,7 @@ static struct PyMemberDef Writer_memberlist[] = {
 };
 
 static void
-Writer_dealloc(WriterObj *self)
+Writer_dealloc(_In_ _Post_invalid_ _Post_ptr_invalid_  _At_(self->rec, _In_ _Post_invalid_ _Post_ptr_invalid_ ) WriterObj *self)
 {
     PyObject_GC_UnTrack(self);
     Py_XDECREF(self->dialect);

@@ -84,7 +84,7 @@ BaseException_clear(PyBaseExceptionObject *self)
 }
 
 static void
-BaseException_dealloc(PyBaseExceptionObject *self)
+BaseException_dealloc(_In_ _Post_invalid_ _Post_ptr_invalid_ PyBaseExceptionObject *self)
 {
     _PyObject_GC_UNTRACK(self);
     BaseException_clear(self);
@@ -518,7 +518,7 @@ StopIteration_clear(PyStopIterationObject *self)
 }
 
 static void
-StopIteration_dealloc(PyStopIterationObject *self)
+StopIteration_dealloc(_In_ _Post_invalid_ _Post_ptr_invalid_ PyStopIterationObject *self)
 {
     _PyObject_GC_UNTRACK(self);
     StopIteration_clear(self);
@@ -585,7 +585,7 @@ SystemExit_clear(PySystemExitObject *self)
 }
 
 static void
-SystemExit_dealloc(PySystemExitObject *self)
+SystemExit_dealloc(_In_ _Post_invalid_ _Post_ptr_invalid_ PySystemExitObject *self)
 {
     _PyObject_GC_UNTRACK(self);
     SystemExit_clear(self);
@@ -667,7 +667,7 @@ ImportError_clear(PyImportErrorObject *self)
 }
 
 static void
-ImportError_dealloc(PyImportErrorObject *self)
+ImportError_dealloc(_In_ _Post_invalid_ _Post_ptr_invalid_ PyImportErrorObject *self)
 {
     _PyObject_GC_UNTRACK(self);
     ImportError_clear(self);
@@ -1069,7 +1069,7 @@ OSError_clear(PyOSErrorObject *self)
 }
 
 static void
-OSError_dealloc(PyOSErrorObject *self)
+OSError_dealloc(_In_ _Post_invalid_ _Post_ptr_invalid_ PyOSErrorObject *self)
 {
     _PyObject_GC_UNTRACK(self);
     OSError_clear(self);
@@ -1401,7 +1401,7 @@ SyntaxError_clear(PySyntaxErrorObject *self)
 }
 
 static void
-SyntaxError_dealloc(PySyntaxErrorObject *self)
+SyntaxError_dealloc(_In_ _Post_invalid_ _Post_ptr_invalid_ PySyntaxErrorObject *self)
 {
     _PyObject_GC_UNTRACK(self);
     SyntaxError_clear(self);
@@ -1843,7 +1843,7 @@ UnicodeError_clear(PyUnicodeErrorObject *self)
 }
 
 static void
-UnicodeError_dealloc(PyUnicodeErrorObject *self)
+UnicodeError_dealloc(_In_ _Post_invalid_ _Post_ptr_invalid_ PyUnicodeErrorObject *self)
 {
     _PyObject_GC_UNTRACK(self);
     UnicodeError_clear(self);
@@ -2287,7 +2287,7 @@ MemoryError_new(PyTypeObject *type, PyObject *args, PyObject *kwds)
 }
 
 static void
-MemoryError_dealloc(PyBaseExceptionObject *self)
+MemoryError_dealloc(_In_ _Post_invalid_ _Post_ptr_invalid_ PyBaseExceptionObject *self)
 {
     _PyObject_GC_UNTRACK(self);
     BaseException_clear(self);

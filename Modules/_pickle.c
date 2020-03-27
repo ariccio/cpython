@@ -436,7 +436,7 @@ typedef struct {
 } Pdata;
 
 static void
-Pdata_dealloc(Pdata *self)
+Pdata_dealloc(_In_ _Post_invalid_ _Post_ptr_invalid_ _At_(self->data, _In_ _Post_invalid_ _Post_ptr_invalid_ ) Pdata *self)
 {
     Py_ssize_t i = Py_SIZE(self);
     while (--i >= 0) {
@@ -794,7 +794,7 @@ PyMemoTable_Clear(PyMemoTable *self)
 }
 
 static void
-PyMemoTable_Del(PyMemoTable *self)
+PyMemoTable_Del(_In_ _Post_invalid_ _Post_ptr_invalid_  _At_(self->mt_table, _In_ _Post_invalid_ _Post_ptr_invalid_ ) PyMemoTable *self)
 {
     if (self == NULL)
         return;
@@ -4631,7 +4631,7 @@ static struct PyMethodDef Pickler_methods[] = {
 };
 
 static void
-Pickler_dealloc(PicklerObject *self)
+Pickler_dealloc(_In_ _Post_invalid_ _Post_ptr_invalid_ PicklerObject *self)
 {
     PyObject_GC_UnTrack(self);
 
@@ -7178,7 +7178,7 @@ static struct PyMethodDef Unpickler_methods[] = {
 };
 
 static void
-Unpickler_dealloc(UnpicklerObject *self)
+Unpickler_dealloc(_In_ _Post_invalid_ _Post_ptr_invalid_ _At_(self->marks, _In_ _Post_invalid_ _Post_ptr_invalid_ ) _At_(self->input_line, _In_ _Post_invalid_ _Post_ptr_invalid_ ) _At_(self->encoding, _In_ _Post_invalid_ _Post_ptr_invalid_ ) _At_(self->errors, _In_ _Post_invalid_ _Post_ptr_invalid_ ) UnpicklerObject *self)
 {
     PyObject_GC_UnTrack((PyObject *)self);
     Py_XDECREF(self->readline);
@@ -7216,7 +7216,7 @@ Unpickler_traverse(UnpicklerObject *self, visitproc visit, void *arg)
 }
 
 static int
-Unpickler_clear(UnpicklerObject *self)
+Unpickler_clear(_At_(self->marks, _In_ _Post_invalid_ _Post_ptr_invalid_ ) _At_(self->input_line, _In_ _Post_invalid_ _Post_ptr_invalid_ ) _At_(self->encoding, _In_ _Post_invalid_ _Post_ptr_invalid_ ) _At_(self->errors, _In_ _Post_invalid_ _Post_ptr_invalid_ ) UnpicklerObject *self)
 {
     Py_CLEAR(self->readline);
     Py_CLEAR(self->readinto);

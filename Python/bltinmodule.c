@@ -540,7 +540,7 @@ filter_new(PyTypeObject *type, PyObject *args, PyObject *kwds)
 }
 
 static void
-filter_dealloc(filterobject *lz)
+filter_dealloc(_In_ _Post_invalid_ _Post_ptr_invalid_ filterobject *lz)
 {
     PyObject_GC_UnTrack(lz);
     Py_XDECREF(lz->func);
@@ -1235,7 +1235,7 @@ map_new(PyTypeObject *type, PyObject *args, PyObject *kwds)
 }
 
 static void
-map_dealloc(mapobject *lz)
+map_dealloc(_In_ _Post_invalid_ _Post_ptr_invalid_ mapobject *lz)
 {
     PyObject_GC_UnTrack(lz);
     Py_XDECREF(lz->iters);
@@ -2577,7 +2577,7 @@ zip_new(PyTypeObject *type, PyObject *args, PyObject *kwds)
 }
 
 static void
-zip_dealloc(zipobject *lz)
+zip_dealloc(_In_ _Post_invalid_ _Post_ptr_invalid_ zipobject *lz)
 {
     PyObject_GC_UnTrack(lz);
     Py_XDECREF(lz->ittuple);

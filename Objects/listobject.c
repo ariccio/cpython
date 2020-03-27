@@ -323,7 +323,7 @@ PyList_Append(PyObject *op, PyObject *newitem)
 /* Methods */
 
 static void
-list_dealloc(PyListObject *op)
+list_dealloc(_In_ _Post_invalid_ _Post_ptr_invalid_ _At_(op->ob_item, _In_ _Post_invalid_ _Post_ptr_invalid_) PyListObject *op)
 {
     Py_ssize_t i;
     PyObject_GC_UnTrack(op);
@@ -568,7 +568,7 @@ list_repeat(PyListObject *a, Py_ssize_t n)
 }
 
 static int
-_list_clear(PyListObject *a)
+_list_clear(_At_(a->ob_item, _In_ _Post_invalid_ _Post_ptr_invalid_ ) PyListObject *a)
 {
     Py_ssize_t i;
     PyObject **item = a->ob_item;

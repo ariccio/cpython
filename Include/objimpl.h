@@ -106,10 +106,10 @@ PyAPI_FUNC(void *) PyObject_Calloc(size_t nelem, size_t elsize);
 _Success_(return != 0) _Check_return_ _Ret_maybenull_ _Post_writable_byte_size_(new_size)
 _CRTALLOCATOR _CRTRESTRICT
 PyAPI_FUNC(void *) PyObject_Realloc(_Pre_maybenull_
-    _When_(return != 0, _Post_invalid_ _Post_ptr_invalid_)
+    _When_(return != 0, _In_ _Post_invalid_ _Post_ptr_invalid_)
     _When_(return == 0, _Post_equal_to_(_Old_(ptr)) _Const_)
     void *ptr, _In_ _CRT_GUARDOVERFLOW size_t new_size);
-PyAPI_FUNC(void) PyObject_Free(_Pre_maybenull_ _Post_invalid_ _Post_ptr_invalid_ void *ptr);
+PyAPI_FUNC(void) PyObject_Free(_Pre_maybenull_ _In_ _Post_invalid_ _Post_ptr_invalid_ void *ptr);
 
 
 /* Macros */

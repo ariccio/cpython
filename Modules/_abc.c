@@ -39,7 +39,7 @@ typedef struct {
 } _abc_data;
 
 static void
-abc_data_dealloc(_abc_data *self)
+abc_data_dealloc(_In_ _Post_invalid_ _Post_ptr_invalid_ _abc_data *self)
 {
     Py_XDECREF(self->_abc_registry);
     Py_XDECREF(self->_abc_cache);

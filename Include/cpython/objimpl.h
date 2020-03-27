@@ -56,7 +56,7 @@ typedef struct {
     void* (*alloc) (void *ctx, size_t size);
 
     /* free an arena */
-    void (*free) (void* ctx, _Post_invalid_ _Post_ptr_invalid_ _Post_ptr_invalid_ void* ptr, size_t size);
+    void (*free) (void* ctx, _In_ _Post_invalid_ _Post_ptr_invalid_ void* ptr, size_t size);
 } PyObjectArenaAllocator;
 
 /* Get the arena allocator. */

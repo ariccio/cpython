@@ -288,7 +288,7 @@ EVP_hash(EVPobject *self, const void *vp, Py_ssize_t len)
 /* Internal methods for a hash object */
 
 static void
-EVP_dealloc(EVPobject *self)
+EVP_dealloc(_In_ _Post_invalid_ _Post_ptr_invalid_ EVPobject *self)
 {
     PyTypeObject *tp = Py_TYPE(self);
     if (self->lock != NULL)

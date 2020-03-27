@@ -115,7 +115,7 @@ typedef struct {
 
 
 static void
-mmap_object_dealloc(mmap_object *m_obj)
+mmap_object_dealloc(_In_ _Post_invalid_ _Post_ptr_invalid_ _At_(m_obj->tagname, _In_ _Post_invalid_ _Post_ptr_invalid_ ) mmap_object *m_obj)
 {
 #ifdef MS_WINDOWS
     Py_BEGIN_ALLOW_THREADS

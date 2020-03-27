@@ -328,7 +328,7 @@ error:
 }
 
 static void
-BZ2Compressor_dealloc(BZ2Compressor *self)
+BZ2Compressor_dealloc(_In_ _Post_invalid_ _Post_ptr_invalid_ BZ2Compressor *self)
 {
     BZ2_bzCompressEnd(&self->bzs);
     if (self->lock != NULL)
@@ -649,7 +649,7 @@ error:
 }
 
 static void
-BZ2Decompressor_dealloc(BZ2Decompressor *self)
+BZ2Decompressor_dealloc(_In_ _Post_invalid_ _Post_ptr_invalid_ _At_(self->input_buffer, _In_ _Post_invalid_ _Post_ptr_invalid_ ) _At_(self->lock, _In_ _Post_invalid_ _Post_ptr_invalid_ )BZ2Decompressor *self)
 {
     if(self->input_buffer != NULL)
         PyMem_Free(self->input_buffer);

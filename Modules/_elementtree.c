@@ -662,7 +662,7 @@ element_gc_clear(ElementObject *self)
 }
 
 static void
-element_dealloc(ElementObject* self)
+element_dealloc(_In_ _Post_invalid_ _Post_ptr_invalid_ ElementObject* self)
 {
     /* bpo-31095: UnTrack is needed before calling any callbacks */
     PyObject_GC_UnTrack(self);
@@ -2089,7 +2089,7 @@ typedef struct {
 
 
 static void
-elementiter_dealloc(ElementIterObject *it)
+elementiter_dealloc(_In_ _Post_invalid_ _Post_ptr_invalid_  _At_(it->parent_stack, _In_ _Post_invalid_ _Post_ptr_invalid_ ) ElementIterObject *it)
 {
     Py_ssize_t i = it->parent_stack_used;
     it->parent_stack_used = 0;
@@ -2497,7 +2497,7 @@ treebuilder_gc_clear(TreeBuilderObject *self)
 }
 
 static void
-treebuilder_dealloc(TreeBuilderObject *self)
+treebuilder_dealloc(_In_ _Post_invalid_ _Post_ptr_invalid_ TreeBuilderObject *self)
 {
     PyObject_GC_UnTrack(self);
     treebuilder_gc_clear(self);
@@ -3811,7 +3811,7 @@ xmlparser_gc_clear(XMLParserObject *self)
 }
 
 static void
-xmlparser_dealloc(XMLParserObject* self)
+xmlparser_dealloc(_In_ _Post_invalid_ _Post_ptr_invalid_ XMLParserObject* self)
 {
     PyObject_GC_UnTrack(self);
     xmlparser_gc_clear(self);

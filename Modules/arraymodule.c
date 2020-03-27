@@ -39,7 +39,7 @@ struct arraydescr {
 
 typedef struct arrayobject {
     PyObject_VAR_HEAD
-    char *ob_item;
+    _Field_size_(allocated) char *ob_item;
     Py_ssize_t allocated;
     const struct arraydescr *ob_descr;
     PyObject *weakreflist; /* List of weak references */
@@ -651,7 +651,7 @@ ins1(arrayobject *self, Py_ssize_t where, PyObject *v)
 /* Methods */
 
 static void
-array_dealloc(arrayobject *op)
+array_dealloc(_In_ _Post_invalid_ _Post_ptr_invalid_ arrayobject *op)
 {
     if (op->weakreflist != NULL)
         PyObject_ClearWeakRefs((PyObject *) op);

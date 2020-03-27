@@ -231,14 +231,14 @@ newSubEntry(ProfilerObject *pObj,  ProfilerEntry *caller, ProfilerEntry* entry)
     return self;
 }
 
-static int freeSubEntry(rotating_node_t *header, void *arg)
+static int freeSubEntry(_In_ _Post_invalid_ _Post_ptr_invalid_ rotating_node_t *header, void *arg)
 {
     ProfilerSubEntry *subentry = (ProfilerSubEntry*) header;
     PyMem_Free(subentry);
     return 0;
 }
 
-static int freeEntry(rotating_node_t *header, void *arg)
+static int freeEntry(_In_ _Post_invalid_ _Post_ptr_invalid_ rotating_node_t *header, void *arg)
 {
     ProfilerEntry *entry = (ProfilerEntry*) header;
     RotatingTree_Enum(entry->calls, freeSubEntry, NULL);
@@ -247,7 +247,7 @@ static int freeEntry(rotating_node_t *header, void *arg)
     return 0;
 }
 
-static void clearEntries(ProfilerObject *pObj)
+static void clearEntries(_At_(pObj->currentProfilerContext, _In_ _Post_invalid_ _Post_ptr_invalid_ ) _At_(pObj->freelistProfilerContext, _In_ _Post_invalid_ _Post_ptr_invalid_ ) ProfilerObject *pObj)
 {
     RotatingTree_Enum(pObj->profilerEntries, freeEntry, NULL);
     pObj->profilerEntries = EMPTY_ROTATING_TREE;
@@ -705,7 +705,7 @@ profiler_clear(ProfilerObject *pObj, PyObject* noarg)
 }
 
 static void
-profiler_dealloc(ProfilerObject *op)
+profiler_dealloc(_In_ _Post_invalid_ _Post_ptr_invalid_ ProfilerObject *op)
 {
     if (op->flags & POF_ENABLED) {
         PyThreadState *tstate = PyThreadState_GET();

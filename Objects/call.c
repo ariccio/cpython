@@ -14,7 +14,7 @@ _PyStack_UnpackDict(PyThreadState *tstate,
                     PyObject *kwargs, PyObject **p_kwnames);
 
 static void
-_PyStack_UnpackDict_Free(PyObject *const *stack, Py_ssize_t nargs,
+_PyStack_UnpackDict_Free(_At_(((PyObject**)stack - 1), _In_ _Post_invalid_ _Post_ptr_invalid_) PyObject *const *stack, Py_ssize_t nargs,
                          PyObject *kwnames);
 
 
@@ -1014,7 +1014,7 @@ _PyStack_UnpackDict(PyThreadState *tstate,
 }
 
 static void
-_PyStack_UnpackDict_Free(PyObject *const *stack, Py_ssize_t nargs,
+_PyStack_UnpackDict_Free(_At_(((PyObject **)stack -1), _In_ _Post_invalid_ _Post_ptr_invalid_) PyObject *const *stack, Py_ssize_t nargs,
                          PyObject *kwnames)
 {
     Py_ssize_t n = PyTuple_GET_SIZE(kwnames) + nargs;

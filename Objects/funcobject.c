@@ -702,7 +702,7 @@ typedef struct {
 } classmethod;
 
 static void
-cm_dealloc(classmethod *cm)
+cm_dealloc(_In_ _Post_invalid_ _Post_ptr_invalid_ classmethod *cm)
 {
     _PyObject_GC_UNTRACK((PyObject *)cm);
     Py_XDECREF(cm->cm_callable);
@@ -890,7 +890,7 @@ typedef struct {
 } staticmethod;
 
 static void
-sm_dealloc(staticmethod *sm)
+sm_dealloc(_In_ _Post_invalid_ _Post_ptr_invalid_ staticmethod *sm)
 {
     _PyObject_GC_UNTRACK((PyObject *)sm);
     Py_XDECREF(sm->sm_callable);

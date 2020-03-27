@@ -381,7 +381,7 @@ _enter_buffered_busy(buffered *self)
 
 
 static void
-buffered_dealloc(buffered *self)
+buffered_dealloc(_In_ _Post_invalid_ _Post_ptr_invalid_ _At_(self->buffer, _In_ _Post_invalid_ _Post_ptr_invalid_ ) buffered *self)
 {
     self->finalizing = 1;
     if (_PyIOBase_finalize((PyObject *) self) < 0)
@@ -2136,7 +2136,7 @@ bufferedrwpair_clear(rwpair *self)
 }
 
 static void
-bufferedrwpair_dealloc(rwpair *self)
+bufferedrwpair_dealloc(_In_ _Post_invalid_ _Post_ptr_invalid_ rwpair *self)
 {
     _PyObject_GC_UNTRACK(self);
     if (self->weakreflist != NULL)

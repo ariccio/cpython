@@ -1493,7 +1493,7 @@ static PyMethodDef property_methods[] = {
 
 
 static void
-property_dealloc(PyObject *self)
+property_dealloc(_In_ _Post_invalid_ _Post_ptr_invalid_ PyObject *self)
 {
     propertyobject *gs = (propertyobject *)self;
 

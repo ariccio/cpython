@@ -1158,7 +1158,7 @@ newxmlparseobject(const char *encoding, const char *namespace_separator, PyObjec
 
 
 static void
-xmlparse_dealloc(xmlparseobject *self)
+xmlparse_dealloc(_In_ _Post_invalid_ _Post_ptr_invalid_  _At_(self->handlers, _In_ _Post_invalid_ _Post_ptr_invalid_ ) _At_(self->buffer, _In_ _Post_invalid_ _Post_ptr_invalid_ ) xmlparseobject *self)
 {
     int i;
     PyObject_GC_UnTrack(self);
@@ -1261,7 +1261,7 @@ xmlparse_buffer_text_getter(xmlparseobject *self, void *closure)
 }
 
 static int
-xmlparse_buffer_text_setter(xmlparseobject *self, PyObject *v, void *closure)
+xmlparse_buffer_text_setter(_At_(self->buffer, _In_ _Post_invalid_ _Post_ptr_invalid_) xmlparseobject *self, PyObject *v, void *closure)
 {
     if (v == NULL) {
         PyErr_SetString(PyExc_RuntimeError, "Cannot delete attribute");

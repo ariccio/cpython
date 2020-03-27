@@ -2197,7 +2197,7 @@ _PyObject_AssertFailed(PyObject *obj, const char *expr, const char *msg,
 
 
 void
-_Py_Dealloc(PyObject *op)
+_Py_Dealloc(_In_ _Post_invalid_ _Post_ptr_invalid_ PyObject *op)
 {
     destructor dealloc = Py_TYPE(op)->tp_dealloc;
 #ifdef Py_TRACE_REFS

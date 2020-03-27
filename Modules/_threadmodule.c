@@ -32,7 +32,7 @@ typedef struct {
 } lockobject;
 
 static void
-lock_dealloc(lockobject *self)
+lock_dealloc(_In_ _Post_invalid_ _Post_ptr_invalid_ lockobject *self)
 {
     if (self->in_weakreflist != NULL)
         PyObject_ClearWeakRefs((PyObject *) self);
@@ -276,7 +276,7 @@ typedef struct {
 } rlockobject;
 
 static void
-rlock_dealloc(rlockobject *self)
+rlock_dealloc(_In_ _Post_invalid_ _Post_ptr_invalid_ rlockobject *self)
 {
     if (self->in_weakreflist != NULL)
         PyObject_ClearWeakRefs((PyObject *) self);
@@ -604,7 +604,7 @@ typedef struct {
 } localdummyobject;
 
 static void
-localdummy_dealloc(localdummyobject *self)
+localdummy_dealloc(_In_ _Post_invalid_ _Post_ptr_invalid_ localdummyobject *self)
 {
     if (self->weakreflist != NULL)
         PyObject_ClearWeakRefs((PyObject *) self);
@@ -797,7 +797,7 @@ local_clear(localobject *self)
 }
 
 static void
-local_dealloc(localobject *self)
+local_dealloc(_In_ _Post_invalid_ _Post_ptr_invalid_ localobject *self)
 {
     /* Weakrefs must be invalidated right now, otherwise they can be used
        from code called below, which is very dangerous since Py_REFCNT(self) == 0 */

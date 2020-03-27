@@ -39,7 +39,7 @@ PyCStgDict_clear(StgDictObject *self)
 }
 
 static void
-PyCStgDict_dealloc(StgDictObject *self)
+PyCStgDict_dealloc(_In_ _Post_invalid_ _Post_ptr_invalid_  _At_(self->format, _In_ _Post_invalid_ _Post_ptr_invalid_ ) _At_(self->shape, _In_ _Post_invalid_ _Post_ptr_invalid_ ) _At_(self->ffi_type_pointer.elements, _In_ _Post_invalid_ _Post_ptr_invalid_ ) StgDictObject *self)
 {
     PyCStgDict_clear(self);
     PyMem_Free(self->format);

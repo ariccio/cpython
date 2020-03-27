@@ -193,7 +193,7 @@ char_loc_ignore(SRE_CODE pattern, SRE_CODE ch)
 /* helpers */
 
 static void
-data_stack_dealloc(SRE_STATE* state)
+data_stack_dealloc(_At_(state->data_stack, _In_ _Post_invalid_ _Post_ptr_invalid_ ) SRE_STATE* state)
 {
     if (state->data_stack) {
         PyMem_FREE(state->data_stack);

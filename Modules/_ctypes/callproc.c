@@ -469,7 +469,7 @@ PyCArgObject_new(void)
 }
 
 static void
-PyCArg_dealloc(PyCArgObject *self)
+PyCArg_dealloc(_In_ _Post_invalid_ _Post_ptr_invalid_ PyCArgObject *self)
 {
     Py_XDECREF(self->obj);
     PyObject_Del(self);

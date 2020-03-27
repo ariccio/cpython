@@ -108,7 +108,7 @@ new_string(const char *s, Py_ssize_t len, struct tok_state *tok)
 }
 
 static char *
-error_ret(struct tok_state *tok) /* XXX */
+error_ret(_When_(tok->fp != NULL && tok->buf != NULL, _At_(tok->buf, _Post_invalid_ _Post_ptr_invalid_ )) struct tok_state *tok) /* XXX */
 {
     tok->decoding_erred = 1;
     if (tok->fp != NULL && tok->buf != NULL) /* see PyTokenizer_Free */
@@ -809,7 +809,7 @@ PyTokenizer_FromFile(FILE *fp, const char* enc,
 /* Free a tok_state structure */
 
 void
-PyTokenizer_Free(struct tok_state *tok)
+PyTokenizer_Free(_In_ _Post_invalid_ _Post_ptr_invalid_  _At_(tok->encoding, _Post_invalid_ _Post_ptr_invalid_ ) _At_(tok->buf, _Post_invalid_ _Post_ptr_invalid_ ) _At_(tok->input, _Post_invalid_ _Post_ptr_invalid_ ) struct tok_state *tok)
 {
     if (tok->encoding != NULL)
         PyMem_FREE(tok->encoding);

@@ -114,7 +114,7 @@ partial_new(PyTypeObject *type, PyObject *args, PyObject *kw)
 }
 
 static void
-partial_dealloc(partialobject *pto)
+partial_dealloc(_In_ _Post_invalid_ _Post_ptr_invalid_ partialobject *pto)
 {
     /* bpo-31095: UnTrack is needed before calling any callbacks */
     PyObject_GC_UnTrack(pto);
@@ -472,7 +472,7 @@ typedef struct {
 } keyobject;
 
 static void
-keyobject_dealloc(keyobject *ko)
+keyobject_dealloc(_In_ _Post_invalid_ _Post_ptr_invalid_ keyobject *ko)
 {
     Py_DECREF(ko->cmp);
     Py_XDECREF(ko->object);
@@ -737,7 +737,7 @@ typedef struct lru_list_elem {
 } lru_list_elem;
 
 static void
-lru_list_elem_dealloc(lru_list_elem *link)
+lru_list_elem_dealloc(_In_ _Post_invalid_ _Post_ptr_invalid_ lru_list_elem *link)
 {
     Py_XDECREF(link->key);
     Py_XDECREF(link->result);
@@ -1220,7 +1220,7 @@ lru_cache_clear_list(lru_list_elem *link)
 }
 
 static void
-lru_cache_dealloc(lru_cache_object *obj)
+lru_cache_dealloc(_In_ _Post_invalid_ _Post_ptr_invalid_ lru_cache_object *obj)
 {
     lru_list_elem *list;
     /* bpo-31095: UnTrack is needed before calling any callbacks */

@@ -2752,7 +2752,7 @@ fail:
 
 /* Free's a NULL terminated char** array of C strings. */
 void
-_Py_FreeCharPArray(char *const array[])
+_Py_FreeCharPArray(_In_ _Post_invalid_ _Post_ptr_invalid_ _Null_terminated_ _At_buffer_(array, _Iter_, array[_Iter_] != NULL, _Null_terminated_ _In_ _Post_invalid_ _Post_ptr_invalid_)char *const array[])
 {
     Py_ssize_t i;
     for (i = 0; array[i] != NULL; ++i) {

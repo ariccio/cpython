@@ -619,7 +619,7 @@ zlib_decompressobj_impl(PyObject *module, int wbits, PyObject *zdict)
 }
 
 static void
-Dealloc(compobject *self)
+Dealloc(_In_ _Post_invalid_ _Post_ptr_invalid_ compobject *self)
 {
     PyObject *type = (PyObject *)Py_TYPE(self);
     PyThread_free_lock(self->lock);

@@ -366,7 +366,7 @@ void pysqlite_statement_mark_dirty(pysqlite_Statement* self)
     self->in_use = 1;
 }
 
-void pysqlite_statement_dealloc(pysqlite_Statement* self)
+void pysqlite_statement_dealloc(_In_ _Post_invalid_ _Post_ptr_invalid_ pysqlite_Statement* self)
 {
     if (self->st) {
         Py_BEGIN_ALLOW_THREADS

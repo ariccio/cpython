@@ -31,7 +31,7 @@ PyAPI_FUNC(unsigned long) PyThread_get_thread_native_id(void);
 #endif
 
 PyAPI_FUNC(PyThread_type_lock) PyThread_allocate_lock(void);
-PyAPI_FUNC(void) PyThread_free_lock(PyThread_type_lock);
+PyAPI_FUNC(void) PyThread_free_lock(_Post_invalid_ _Post_ptr_invalid_ PyThread_type_lock);
 PyAPI_FUNC(int) PyThread_acquire_lock(PyThread_type_lock, int);
 #define WAIT_LOCK       1
 #define NOWAIT_LOCK     0

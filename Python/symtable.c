@@ -119,7 +119,7 @@ ste_repr(PySTEntryObject *ste)
 }
 
 static void
-ste_dealloc(PySTEntryObject *ste)
+ste_dealloc(_In_ _Post_invalid_ _Post_ptr_invalid_ PySTEntryObject *ste)
 {
     ste->ste_table = NULL;
     Py_XDECREF(ste->ste_id);
@@ -359,7 +359,7 @@ PySymtable_Build(mod_ty mod, const char *filename_str, PyFutureFeatures *future)
 }
 
 void
-PySymtable_Free(struct symtable *st)
+PySymtable_Free(_In_ _Post_invalid_ _Post_ptr_invalid_ struct symtable *st)
 {
     Py_XDECREF(st->st_filename);
     Py_XDECREF(st->st_blocks);

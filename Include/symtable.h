@@ -83,7 +83,7 @@ PyAPI_FUNC(struct symtable *) PySymtable_BuildObject(
     PyFutureFeatures *future);
 PyAPI_FUNC(PySTEntryObject *) PySymtable_Lookup(struct symtable *, void *);
 
-PyAPI_FUNC(void) PySymtable_Free(struct symtable *);
+PyAPI_FUNC(void) PySymtable_Free(_In_ _Post_invalid_ _Post_ptr_invalid_ struct symtable *);
 
 /* Flags for def-use information */
 

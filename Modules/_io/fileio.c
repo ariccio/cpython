@@ -516,7 +516,7 @@ fileio_clear(fileio *self)
 }
 
 static void
-fileio_dealloc(fileio *self)
+fileio_dealloc(_In_ _Post_invalid_ _Post_ptr_invalid_ fileio *self)
 {
     self->finalizing = 1;
     if (_PyIOBase_finalize((PyObject *) self) < 0)

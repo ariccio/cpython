@@ -2094,7 +2094,7 @@ solid_base(PyTypeObject *type)
         return base;
 }
 
-static void object_dealloc(PyObject *);
+static void object_dealloc(_Post_invalid_ _Post_ptr_invalid_ PyObject * self);
 static int object_init(PyObject *, PyObject *, PyObject *);
 static int update_slot(PyTypeObject *, PyObject *);
 static void fixup_slot_dispatchers(PyTypeObject *);
@@ -3357,7 +3357,7 @@ extern void
 _PyDictKeys_DecRef(PyDictKeysObject *keys);
 
 static void
-type_dealloc(PyTypeObject *type)
+type_dealloc(_In_ _Post_invalid_ _Post_ptr_invalid_ PyTypeObject *type)
 {
     PyHeapTypeObject *et;
     PyObject *tp, *val, *tb;
@@ -3818,7 +3818,7 @@ object_new(PyTypeObject *type, PyObject *args, PyObject *kwds)
 }
 
 static void
-object_dealloc(PyObject *self)
+object_dealloc(_In_ _Post_invalid_ _Post_ptr_invalid_ PyObject *self)
 {
     Py_TYPE(self)->tp_free(self);
 }
@@ -5917,7 +5917,7 @@ wrap_call(PyObject *self, PyObject *args, void *wrapped, PyObject *kwds)
 }
 
 static PyObject *
-wrap_del(PyObject *self, PyObject *args, void *wrapped)
+wrap_del(_In_ _Post_invalid_ _Post_ptr_invalid_ PyObject *self, PyObject *args, void *wrapped)
 {
     destructor func = (destructor)wrapped;
 
@@ -7723,7 +7723,7 @@ static PyMemberDef super_members[] = {
 };
 
 static void
-super_dealloc(PyObject *self)
+super_dealloc(_In_ _Post_invalid_ _Post_ptr_invalid_ PyObject *self)
 {
     superobject *su = (superobject *)self;
 
