@@ -51,7 +51,7 @@ fail:
 }
 
 VOID
-FreeNonRecursiveMutex(_In_ _Post_invalid_ _Post_ptr_invalid_ PNRMUTEX mutex)
+FreeNonRecursiveMutex(_Post_ptr_invalid_ PNRMUTEX mutex)
 {
     if (mutex) {
         PyCOND_FINI(&mutex->cv);

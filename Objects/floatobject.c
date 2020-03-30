@@ -214,7 +214,7 @@ PyFloat_FromString(PyObject *v)
 }
 
 static void
-float_dealloc(_In_ _Post_invalid_ _Post_ptr_invalid_ PyFloatObject *op)
+float_dealloc(_Post_ptr_invalid_ PyFloatObject *op)
 {
     if (PyFloat_CheckExact(op)) {
         if (numfree >= PyFloat_MAXFREELIST)  {

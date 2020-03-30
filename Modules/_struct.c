@@ -1479,7 +1479,7 @@ Struct___init___impl(PyStructObject *self, PyObject *format)
 }
 
 static void
-s_dealloc(_In_ _Post_invalid_ _Post_ptr_invalid_  _At_(s->s_codes, _In_ _Post_invalid_ _Post_ptr_invalid_ ) PyStructObject *s)
+s_dealloc(_Post_ptr_invalid_  _At_(s->s_codes, _Post_ptr_invalid_ ) PyStructObject *s)
 {
     PyTypeObject *tp = Py_TYPE(s);
     if (s->weakreflist != NULL)

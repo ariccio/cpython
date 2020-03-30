@@ -55,7 +55,7 @@ namespace_init(_PyNamespaceObject *ns, PyObject *args, PyObject *kwds)
 
 
 static void
-namespace_dealloc(_In_ _Post_invalid_ _Post_ptr_invalid_ _PyNamespaceObject *ns)
+namespace_dealloc(_Post_ptr_invalid_ _PyNamespaceObject *ns)
 {
     PyObject_GC_UnTrack(ns);
     Py_CLEAR(ns->ns_dict);

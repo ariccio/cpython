@@ -190,7 +190,7 @@ typedef struct {
 } PyST_Object;
 
 
-static void parser_free(_In_ _Post_invalid_ _Post_ptr_invalid_ PyST_Object *st);
+static void parser_free(_Post_ptr_invalid_ PyST_Object *st);
 static PyObject* parser_sizeof(PyST_Object *, void *);
 static PyObject* parser_richcompare(PyObject *left, PyObject *right, int op);
 static PyObject* parser_compilest(PyST_Object *, PyObject *, PyObject *);
@@ -351,7 +351,7 @@ parser_newstobject(node *st, int type)
  *
  */
 static void
-parser_free(_In_ _Post_invalid_ _Post_ptr_invalid_ PyST_Object *st)
+parser_free(_Post_ptr_invalid_ PyST_Object *st)
 {
     PyNode_Free(st->st_node);
     PyObject_Del(st);

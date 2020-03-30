@@ -594,7 +594,7 @@ stringio_clear(stringio *self)
 }
 
 static void
-stringio_dealloc(_In_ _Post_invalid_ _Post_ptr_invalid_ _At_(self->buf, _In_ _Post_invalid_ _Post_ptr_invalid_ ) stringio *self)
+stringio_dealloc(_Post_ptr_invalid_ _At_(self->buf, _Post_ptr_invalid_ ) stringio *self)
 {
     _PyObject_GC_UNTRACK(self);
     self->ok = 0;

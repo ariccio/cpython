@@ -5012,7 +5012,7 @@ sock_finalize(PySocketSockObject *s)
 }
 
 static void
-sock_dealloc(_In_ _Post_invalid_ _Post_ptr_invalid_ PySocketSockObject *s)
+sock_dealloc(_Post_ptr_invalid_ PySocketSockObject *s)
 {
     if (PyObject_CallFinalizerFromDealloc((PyObject *)s) < 0)
         return;

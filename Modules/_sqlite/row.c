@@ -24,7 +24,7 @@
 #include "row.h"
 #include "cursor.h"
 
-void pysqlite_row_dealloc(_In_ _Post_invalid_ _Post_ptr_invalid_ pysqlite_Row* self)
+void pysqlite_row_dealloc(_Post_ptr_invalid_ pysqlite_Row* self)
 {
     Py_XDECREF(self->data);
     Py_XDECREF(self->description);

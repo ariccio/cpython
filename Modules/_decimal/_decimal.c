@@ -1222,7 +1222,7 @@ context_new(PyTypeObject *type, PyObject *args UNUSED, PyObject *kwds UNUSED)
 }
 
 static void
-context_dealloc(_In_ _Post_invalid_ _Post_ptr_invalid_ PyDecContextObject *self)
+context_dealloc(_Post_ptr_invalid_ PyDecContextObject *self)
 {
 #ifndef WITH_DECIMAL_CONTEXTVAR
     if (self == cached_context) {
@@ -1756,7 +1756,7 @@ ctxmanager_new(PyTypeObject *type UNUSED, PyObject *args, PyObject *kwds)
 }
 
 static void
-ctxmanager_dealloc(_In_ _Post_invalid_ _Post_ptr_invalid_ PyDecContextManagerObject *self)
+ctxmanager_dealloc(_Post_ptr_invalid_ PyDecContextManagerObject *self)
 {
     Py_XDECREF(self->local);
     Py_XDECREF(self->global);
@@ -1866,7 +1866,7 @@ PyDecType_New(PyTypeObject *type)
 #define dec_alloc() PyDecType_New(&PyDec_Type)
 
 static void
-dec_dealloc(_In_ _Post_invalid_ _Post_ptr_invalid_ PyObject *dec)
+dec_dealloc(_Post_ptr_invalid_ PyObject *dec)
 {
     mpd_del(MPD(dec));
     Py_TYPE(dec)->tp_free(dec);

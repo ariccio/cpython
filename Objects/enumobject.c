@@ -79,7 +79,7 @@ enum_new_impl(PyTypeObject *type, PyObject *iterable, PyObject *start)
 }
 
 static void
-enum_dealloc(_In_ _Post_invalid_ _Post_ptr_invalid_ enumobject *en)
+enum_dealloc(_Post_ptr_invalid_ enumobject *en)
 {
     PyObject_GC_UnTrack(en);
     Py_XDECREF(en->en_sit);
@@ -313,7 +313,7 @@ reversed_new_impl(PyTypeObject *type, PyObject *seq)
 }
 
 static void
-reversed_dealloc(_In_ _Post_invalid_ _Post_ptr_invalid_ reversedobject *ro)
+reversed_dealloc(_Post_ptr_invalid_ reversedobject *ro)
 {
     PyObject_GC_UnTrack(ro);
     Py_XDECREF(ro->seq);

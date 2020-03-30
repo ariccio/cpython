@@ -849,7 +849,7 @@ newPyTclObject(Tcl_Obj *arg)
 }
 
 static void
-PyTclObject_dealloc(_In_ _Post_invalid_ _Post_ptr_invalid_ PyTclObject *self)
+PyTclObject_dealloc(_Post_ptr_invalid_ PyTclObject *self)
 {
     PyObject *tp = (PyObject *) Py_TYPE(self);
     Tcl_DecrRefCount(self->value);
@@ -2765,7 +2765,7 @@ Tktt_New(PyObject *func)
 }
 
 static void
-Tktt_Dealloc(_In_ _Post_invalid_ _Post_ptr_invalid_ PyObject *self)
+Tktt_Dealloc(_Post_ptr_invalid_ PyObject *self)
 {
     TkttObject *v = (TkttObject *)self;
     PyObject *func = v->func;
@@ -3039,7 +3039,7 @@ _tkinter_tkapp_willdispatch_impl(TkappObject *self)
 /**** Tkapp Type Methods ****/
 
 static void
-Tkapp_Dealloc(_In_ _Post_invalid_ _Post_ptr_invalid_ PyObject *self)
+Tkapp_Dealloc(_Post_ptr_invalid_ PyObject *self)
 {
     PyObject *tp = (PyObject *) Py_TYPE(self);
     /*CHECK_TCL_APPARTMENT;*/

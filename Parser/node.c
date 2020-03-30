@@ -137,12 +137,12 @@ PyNode_AddChild(node *n1, int type, char *str, int lineno, int col_offset,
 }
 
 /* Forward */
-static void freechildren(_In_ _Post_invalid_ _Post_ptr_invalid_ node *);
+static void freechildren(_Post_ptr_invalid_ node *);
 static Py_ssize_t sizeofchildren(node *n);
 
 
 void
-PyNode_Free(_In_ _Post_invalid_ _Post_ptr_invalid_ node *n)
+PyNode_Free(_Post_ptr_invalid_ node *n)
 {
     if (n != NULL) {
         freechildren(n);
@@ -161,7 +161,7 @@ _PyNode_SizeOf(node *n)
 }
 
 static void
-freechildren(_In_ _Post_invalid_ _Post_ptr_invalid_ node *n)
+freechildren(_Post_ptr_invalid_ node *n)
 {
     int i;
     for (i = NCH(n); --i >= 0; )

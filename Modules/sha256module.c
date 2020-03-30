@@ -393,7 +393,7 @@ newSHA256object(void)
 /* Internal methods for a hash object */
 
 static void
-SHA_dealloc(_In_ _Post_invalid_ _Post_ptr_invalid_ PyObject *ptr)
+SHA_dealloc(_Post_ptr_invalid_ PyObject *ptr)
 {
     PyObject_Del(ptr);
 }

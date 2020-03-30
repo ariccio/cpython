@@ -271,7 +271,7 @@ PyCField_clear(CFieldObject *self)
 }
 
 static void
-PyCField_dealloc(_In_ _Post_invalid_ _Post_ptr_invalid_ PyObject *self)
+PyCField_dealloc(_Post_ptr_invalid_ PyObject *self)
 {
     PyCField_clear((CFieldObject *)self);
     Py_TYPE(self)->tp_free((PyObject *)self);

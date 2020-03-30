@@ -741,7 +741,7 @@ _odict_remove_node(PyODictObject *od, _ODictNode *node)
    we modify od_fast_nodes.
 */
 static int
-_odict_clear_node(PyODictObject *od, _In_ _Post_invalid_ _Post_ptr_invalid_ _ODictNode *node, PyObject *key,
+_odict_clear_node(PyODictObject *od, _Post_ptr_invalid_ _ODictNode *node, PyObject *key,
                   Py_hash_t hash)
 {
     Py_ssize_t i;

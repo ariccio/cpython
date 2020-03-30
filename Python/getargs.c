@@ -199,7 +199,7 @@ _PyArg_VaParse_SizeT(PyObject *args, const char *format, va_list va)
 /* Handle cleanup of allocated memory in case of exception */
 
 static int
-cleanup_ptr(PyObject *self, _In_ _Post_invalid_ _Post_ptr_invalid_ void *ptr)
+cleanup_ptr(PyObject *self, _Post_ptr_invalid_ void *ptr)
 {
     if (ptr) {
         PyMem_FREE(ptr);

@@ -257,7 +257,7 @@ py_sha3_new_impl(PyTypeObject *type, PyObject *data, int usedforsecurity)
 /* Internal methods for a hash object */
 
 static void
-SHA3_dealloc(_In_ _Post_invalid_ _Post_ptr_invalid_ SHA3object *self)
+SHA3_dealloc(_Post_ptr_invalid_ SHA3object *self)
 {
     if (self->lock) {
         PyThread_free_lock(self->lock);

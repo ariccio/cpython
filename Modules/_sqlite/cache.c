@@ -46,7 +46,7 @@ pysqlite_Node* pysqlite_new_node(PyObject* key, PyObject* data)
     return node;
 }
 
-void pysqlite_node_dealloc(_In_ _Post_invalid_ _Post_ptr_invalid_ pysqlite_Node* self)
+void pysqlite_node_dealloc(_Post_ptr_invalid_ pysqlite_Node* self)
 {
     Py_DECREF(self->key);
     Py_DECREF(self->data);
@@ -86,7 +86,7 @@ int pysqlite_cache_init(pysqlite_Cache* self, PyObject* args, PyObject* kwargs)
     return 0;
 }
 
-void pysqlite_cache_dealloc(_In_ _Post_invalid_ _Post_ptr_invalid_ pysqlite_Cache* self)
+void pysqlite_cache_dealloc(_Post_ptr_invalid_ pysqlite_Cache* self)
 {
     pysqlite_Node* node;
     pysqlite_Node* delete_node;

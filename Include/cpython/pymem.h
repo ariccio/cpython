@@ -21,7 +21,7 @@ PyAPI_FUNC(void *) PyMem_RawRealloc(_Pre_maybenull_
     _When_(return == 0, _Post_equal_to_(_Old_(ptr)) _Const_)
     void *ptr, _In_ _CRT_GUARDOVERFLOW size_t new_size);
 
-PyAPI_FUNC(void) PyMem_RawFree(_Pre_maybenull_ _In_ _Post_invalid_ _Post_ptr_invalid_ void *ptr);
+PyAPI_FUNC(void) PyMem_RawFree(_Pre_maybenull_ _Post_ptr_invalid_ void *ptr);
 
 /* Try to get the allocators name set by _PyMem_SetupAllocators(). */
 PyAPI_FUNC(const char*) _PyMem_GetCurrentAllocatorName(void);
@@ -87,7 +87,7 @@ typedef struct {
         void *ptr, _In_ _CRT_GUARDOVERFLOW size_t new_size);
 
     /* release a memory block */
-    void (*free) (void *ctx, _Pre_maybenull_ _In_ _Post_invalid_ _Post_ptr_invalid_ void *ptr);
+    void (*free) (void *ctx, _Pre_maybenull_ _Post_ptr_invalid_ void *ptr);
 
 } PyMemAllocatorEx;
 

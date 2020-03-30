@@ -106,7 +106,7 @@ picklebuf_clear(PyPickleBufferObject *self)
 }
 
 static void
-picklebuf_dealloc(_In_ _Post_invalid_ _Post_ptr_invalid_ PyPickleBufferObject *self)
+picklebuf_dealloc(_Post_ptr_invalid_ PyPickleBufferObject *self)
 {
     PyObject_GC_UnTrack(self);
     if (self->weakreflist != NULL)

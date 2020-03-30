@@ -219,7 +219,7 @@ ndarray_new(PyTypeObject *type, PyObject *args, PyObject *kwds)
 }
 
 static void
-ndarray_dealloc(_In_ _Post_invalid_ _Post_ptr_invalid_ NDArrayObject *self)
+ndarray_dealloc(_Post_ptr_invalid_ NDArrayObject *self)
 {
     if (self->head) {
         if (ND_IS_CONSUMER(self)) {
@@ -2732,7 +2732,7 @@ staticarray_init(PyObject *self, PyObject *args, PyObject *kwds)
 }
 
 static void
-staticarray_dealloc(_In_ _Post_invalid_ _Post_ptr_invalid_ StaticArrayObject *self)
+staticarray_dealloc(_Post_ptr_invalid_ StaticArrayObject *self)
 {
     PyObject_Del(self);
 }

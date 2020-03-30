@@ -448,7 +448,7 @@ context_tp_traverse(PyContext *self, visitproc visit, void *arg)
 }
 
 static void
-context_tp_dealloc(_In_ _Post_invalid_ _Post_ptr_invalid_ PyContext *self)
+context_tp_dealloc(_Post_ptr_invalid_ PyContext *self)
 {
     _PyObject_GC_UNTRACK(self);
 
@@ -867,7 +867,7 @@ contextvar_tp_traverse(PyContextVar *self, visitproc visit, void *arg)
 }
 
 static void
-contextvar_tp_dealloc(_In_ _Post_invalid_ _Post_ptr_invalid_ PyContextVar *self)
+contextvar_tp_dealloc(_Post_ptr_invalid_ PyContextVar *self)
 {
     PyObject_GC_UnTrack(self);
     (void)contextvar_tp_clear(self);
@@ -1100,7 +1100,7 @@ token_tp_traverse(PyContextToken *self, visitproc visit, void *arg)
 }
 
 static void
-token_tp_dealloc(_In_ _Post_invalid_ _Post_ptr_invalid_ PyContextToken *self)
+token_tp_dealloc(_Post_ptr_invalid_ PyContextToken *self)
 {
     PyObject_GC_UnTrack(self);
     (void)token_tp_clear(self);

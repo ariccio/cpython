@@ -980,7 +980,7 @@ typedef struct {
 } formatteriterobject;
 
 static void
-formatteriter_dealloc(_In_ _Post_invalid_ _Post_ptr_invalid_ formatteriterobject *it)
+formatteriter_dealloc(_Post_ptr_invalid_ formatteriterobject *it)
 {
     Py_XDECREF(it->str);
     PyObject_FREE(it);
@@ -1144,7 +1144,7 @@ typedef struct {
 } fieldnameiterobject;
 
 static void
-fieldnameiter_dealloc(_In_ _Post_invalid_ _Post_ptr_invalid_ fieldnameiterobject *it)
+fieldnameiter_dealloc(_Post_ptr_invalid_ fieldnameiterobject *it)
 {
     Py_XDECREF(it->str);
     PyObject_FREE(it);

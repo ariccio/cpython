@@ -79,7 +79,7 @@ interpid_new(PyTypeObject *cls, PyObject *args, PyObject *kwds)
 }
 
 static void
-interpid_dealloc(_In_ _Post_invalid_ _Post_ptr_invalid_ PyObject *v)
+interpid_dealloc(_Post_ptr_invalid_ PyObject *v)
 {
     int64_t id = ((interpid *)v)->id;
     PyInterpreterState *interp = _PyInterpreterState_LookUpID(id);

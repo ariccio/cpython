@@ -109,7 +109,7 @@ PyAPI_FUNC(void *) PyObject_Realloc(_Pre_maybenull_
     _When_(return != 0, _In_ _Post_invalid_ _Post_ptr_invalid_)
     _When_(return == 0, _Post_equal_to_(_Old_(ptr)) _Const_)
     void *ptr, _In_ _CRT_GUARDOVERFLOW size_t new_size);
-PyAPI_FUNC(void) PyObject_Free(_Pre_maybenull_ _In_ _Post_invalid_ _Post_ptr_invalid_ void *ptr);
+PyAPI_FUNC(void) PyObject_Free(_Pre_maybenull_ _Post_ptr_invalid_ void *ptr);
 
 
 /* Macros */

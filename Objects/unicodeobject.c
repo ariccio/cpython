@@ -1895,7 +1895,7 @@ _PyUnicode_Ready(PyObject *unicode)
 }
 
 static void
-unicode_dealloc(_In_ _Post_invalid_ _Post_ptr_invalid_ PyObject *unicode)
+unicode_dealloc(_Post_ptr_invalid_ PyObject *unicode)
 {
     switch (PyUnicode_CHECK_INTERNED(unicode)) {
     case SSTATE_NOT_INTERNED:

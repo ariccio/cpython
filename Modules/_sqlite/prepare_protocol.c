@@ -28,7 +28,7 @@ int pysqlite_prepare_protocol_init(pysqlite_PrepareProtocol* self, PyObject* arg
     return 0;
 }
 
-void pysqlite_prepare_protocol_dealloc(_In_ _Post_invalid_ _Post_ptr_invalid_ pysqlite_PrepareProtocol* self)
+void pysqlite_prepare_protocol_dealloc(_Post_ptr_invalid_ pysqlite_PrepareProtocol* self)
 {
     Py_TYPE(self)->tp_free((PyObject*)self);
 }

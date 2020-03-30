@@ -306,7 +306,7 @@ _PyDict_Fini(void)
 #define DK_MASK(dk) (((dk)->dk_size)-1)
 #define IS_POWER_OF_2(x) (((x) & (x-1)) == 0)
 
-static void free_keys_object(_In_ _Post_invalid_ _Post_ptr_invalid_ PyDictKeysObject *keys);
+static void free_keys_object(_Post_ptr_invalid_ PyDictKeysObject *keys);
 
 static inline void
 dictkeys_incref(PyDictKeysObject *dk)
@@ -581,7 +581,7 @@ static PyDictKeysObject *new_keys_object(Py_ssize_t size)
 }
 
 static void
-free_keys_object(_In_ _Post_invalid_ _Post_ptr_invalid_ PyDictKeysObject *keys)
+free_keys_object(_Post_ptr_invalid_ PyDictKeysObject *keys)
 {
     PyDictKeyEntry *entries = DK_ENTRIES(keys);
     Py_ssize_t i, n;
@@ -1985,7 +1985,7 @@ Fail:
 /* Methods */
 
 static void
-dict_dealloc(_In_ _Post_invalid_ _Post_ptr_invalid_ _At_(mp->ma_values, _In_ _Post_invalid_ _Post_ptr_invalid_ ) PyDictObject *mp)
+dict_dealloc(_Post_ptr_invalid_ _At_(mp->ma_values, _Post_ptr_invalid_ ) PyDictObject *mp)
 {
     PyObject **values = mp->ma_values;
     PyDictKeysObject *keys = mp->ma_keys;

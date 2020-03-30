@@ -137,7 +137,7 @@ typedef struct {
 } DictRemoverObject;
 
 static void
-_DictRemover_dealloc(_In_ _Post_invalid_ _Post_ptr_invalid_ PyObject *myself)
+_DictRemover_dealloc(_Post_ptr_invalid_ PyObject *myself)
 {
     DictRemoverObject *self = (DictRemoverObject *)myself;
     Py_XDECREF(self->key);
@@ -404,7 +404,7 @@ typedef struct {
 
 
 static void
-StructParam_dealloc(_In_ _Post_invalid_ _Post_ptr_invalid_ PyObject _At_(((StructParamObject*)myself)->ptr, _In_ _Post_invalid_ _Post_ptr_invalid_) *myself)
+StructParam_dealloc(_Post_ptr_invalid_ PyObject _At_(((StructParamObject*)myself)->ptr, _In_ _Post_invalid_ _Post_ptr_invalid_) *myself)
 {
     StructParamObject *self = (StructParamObject *)myself;
     PyMem_Free(self->ptr);
@@ -2779,7 +2779,7 @@ PyCData_clear(CDataObject *self)
 }
 
 static void
-PyCData_dealloc(_In_ _Post_invalid_ _Post_ptr_invalid_ PyObject *self)
+PyCData_dealloc(_Post_ptr_invalid_ PyObject *self)
 {
     PyCData_clear((CDataObject *)self);
     Py_TYPE(self)->tp_free(self);
@@ -4262,7 +4262,7 @@ PyCFuncPtr_clear(PyCFuncPtrObject *self)
 }
 
 static void
-PyCFuncPtr_dealloc(_In_ _Post_invalid_ _Post_ptr_invalid_ PyCFuncPtrObject *self)
+PyCFuncPtr_dealloc(_Post_ptr_invalid_ PyCFuncPtrObject *self)
 {
     PyCFuncPtr_clear(self);
     Py_TYPE(self)->tp_free((PyObject *)self);

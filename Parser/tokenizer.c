@@ -809,7 +809,7 @@ PyTokenizer_FromFile(FILE *fp, const char* enc,
 /* Free a tok_state structure */
 
 void
-PyTokenizer_Free(_In_ _Post_invalid_ _Post_ptr_invalid_  _At_(tok->encoding, _Post_invalid_ _Post_ptr_invalid_ ) _At_(tok->buf, _Post_invalid_ _Post_ptr_invalid_ ) _At_(tok->input, _Post_invalid_ _Post_ptr_invalid_ ) struct tok_state *tok)
+PyTokenizer_Free(_Post_ptr_invalid_  _At_(tok->encoding, _Post_invalid_ _Post_ptr_invalid_ ) _At_(tok->buf, _Post_invalid_ _Post_ptr_invalid_ ) _At_(tok->input, _Post_invalid_ _Post_ptr_invalid_ ) struct tok_state *tok)
 {
     if (tok->encoding != NULL)
         PyMem_FREE(tok->encoding);

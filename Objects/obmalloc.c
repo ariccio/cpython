@@ -107,7 +107,7 @@ _Check_return_ _Ret_maybenull_ _Post_writable_byte_size_(nelem * elsize)
 _CRTALLOCATOR _CRTRESTRICT
 static void* _PyObject_Calloc(void *ctx, _In_ size_t nelem, _In_ size_t elsize);
 
-static void _PyObject_Free(void *ctx, _Pre_maybenull_ _In_ _Post_invalid_ _Post_ptr_invalid_ void *p);
+static void _PyObject_Free(void *ctx, _Pre_maybenull_ _Post_ptr_invalid_ void *p);
 
 _Success_(return != 0) _Check_return_ _Ret_maybenull_ _Post_writable_byte_size_(size)
 _CRTALLOCATOR _CRTRESTRICT
@@ -168,7 +168,7 @@ _PyMem_RawRealloc(void *ctx, _Pre_maybenull_
 }
 
 static void
-_PyMem_RawFree(void *ctx, _Pre_maybenull_ _In_ _Post_invalid_ _Post_ptr_invalid_ void *ptr)
+_PyMem_RawFree(void *ctx, _Pre_maybenull_ _Post_invalid_ _Post_ptr_invalid_ void *ptr)
 {
     free(ptr);
 }
@@ -1918,7 +1918,7 @@ insert_to_freepool(poolp pool)
    Return 1 if it was freed.
    Return 0 if the block was not allocated by pymalloc_alloc(). */
 static inline int
-pymalloc_free(void *ctx, _Pre_maybenull_ _In_ _Post_invalid_ _Post_ptr_invalid_ void *p)
+pymalloc_free(void *ctx, _Pre_maybenull_ _Post_invalid_ _Post_ptr_invalid_ void *p)
 {
     assert(p != NULL);
 

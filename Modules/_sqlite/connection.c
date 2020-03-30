@@ -242,7 +242,7 @@ void pysqlite_do_all_statements(pysqlite_Connection* self, int action, int reset
     }
 }
 
-void pysqlite_connection_dealloc(_In_ _Post_invalid_ _Post_ptr_invalid_ pysqlite_Connection* self)
+void pysqlite_connection_dealloc(_Post_ptr_invalid_ pysqlite_Connection* self)
 {
     Py_XDECREF(self->statement_cache);
 

@@ -39,7 +39,7 @@ struct _sharednsitem {
     _PyCrossInterpreterData data;
 };
 
-static void _sharednsitem_clear(_At_(item->name, _In_ _Post_invalid_ _Post_ptr_invalid_) struct _sharednsitem * item);  // forward
+static void _sharednsitem_clear(_At_(item->name, _Post_ptr_invalid_) struct _sharednsitem * item);  // forward
 
 static int
 _sharednsitem_init(struct _sharednsitem *item, PyObject *key, PyObject *value)
@@ -56,7 +56,7 @@ _sharednsitem_init(struct _sharednsitem *item, PyObject *key, PyObject *value)
 }
 
 static void
-_sharednsitem_clear(_At_(item->name, _In_ _Post_invalid_ _Post_ptr_invalid_ ) struct _sharednsitem *item)
+_sharednsitem_clear(_At_(item->name, _Post_ptr_invalid_ ) struct _sharednsitem *item)
 {
     if (item->name != NULL) {
         PyMem_Free(item->name);
@@ -107,7 +107,7 @@ _sharedns_new(Py_ssize_t len)
 }
 
 static void
-_sharedns_free(_In_ _Post_invalid_ _Post_ptr_invalid_  _At_(shared->items, _Post_invalid_ _Post_ptr_invalid_ ) _sharedns *shared)
+_sharedns_free(_Post_ptr_invalid_  _At_(shared->items, _Post_invalid_ _Post_ptr_invalid_ ) _sharedns *shared)
 {
     for (Py_ssize_t i=0; i < shared->len; i++) {
         _sharednsitem_clear(&shared->items[i]);
@@ -436,7 +436,7 @@ _channelqueue_clear(_channelqueue *queue)
 }
 
 static void
-_channelqueue_free(_In_ _Post_invalid_ _Post_ptr_invalid_ _channelqueue *queue)
+_channelqueue_free(_Post_ptr_invalid_ _channelqueue *queue)
 {
     _channelqueue_clear(queue);
     PyMem_Free(queue);
@@ -574,7 +574,7 @@ _channelends_clear(_channelends *ends)
 }
 
 static void
-_channelends_free(_In_ _Post_invalid_ _Post_ptr_invalid_ _channelends *ends)
+_channelends_free(_Post_ptr_invalid_ _channelends *ends)
 {
     _channelends_clear(ends);
     PyMem_Free(ends);
@@ -705,7 +705,7 @@ _channelends_close_all(_channelends *ends, int which, int force)
 
 struct _channel;
 struct _channel_closing;
-static void _channel_clear_closing(_At_(chan->closing, _In_ _Post_invalid_ _Post_ptr_invalid_) struct _channel * chan);
+static void _channel_clear_closing(_At_(chan->closing, _Post_ptr_invalid_) struct _channel * chan);
 static void _channel_finish_closing(struct _channel *);
 
 typedef struct _channel {
@@ -747,7 +747,7 @@ _channel_new(void)
 }
 
 static void
-_channel_free(_In_ _Post_invalid_ _Post_ptr_invalid_  _At_(chan->queue, _Post_invalid_ _Post_ptr_invalid_ ) _At_(chan->ends, _Post_invalid_ _Post_ptr_invalid_ ) _At_(chan->mutex, _Post_invalid_ _Post_ptr_invalid_ ) _PyChannelState *chan)
+_channel_free(_Post_ptr_invalid_  _At_(chan->queue, _Post_invalid_ _Post_ptr_invalid_ ) _At_(chan->ends, _Post_invalid_ _Post_ptr_invalid_ ) _At_(chan->mutex, _Post_invalid_ _Post_ptr_invalid_ ) _PyChannelState *chan)
 {
     _channel_clear_closing(chan);
     PyThread_acquire_lock(chan->mutex, WAIT_LOCK);
@@ -897,7 +897,7 @@ _channelref_new(int64_t id, _PyChannelState *chan)
 //}
 
 static void
-_channelref_free(_In_ _Post_invalid_ _Post_ptr_invalid_ _channelref *ref)
+_channelref_free(_Post_ptr_invalid_ _channelref *ref)
 {
     if (ref->chan != NULL) {
         _channel_clear_closing(ref->chan);
@@ -1232,7 +1232,7 @@ done:
 }
 
 static void
-_channel_clear_closing(_At_(chan->closing, _In_ _Post_invalid_ _Post_ptr_invalid_ ) struct _channel *chan) {
+_channel_clear_closing(_At_(chan->closing, _Post_ptr_invalid_ ) struct _channel *chan) {
     PyThread_acquire_lock(chan->mutex, WAIT_LOCK);
     if (chan->closing != NULL) {
         PyMem_Free(chan->closing);
@@ -1499,7 +1499,7 @@ channelid_new(PyTypeObject *cls, PyObject *args, PyObject *kwds)
 }
 
 static void
-channelid_dealloc(_In_ _Post_invalid_ _Post_ptr_invalid_ PyObject *v)
+channelid_dealloc(_Post_ptr_invalid_ PyObject *v)
 {
     int64_t cid = ((channelid *)v)->id;
     _channels *channels = ((channelid *)v)->channels;

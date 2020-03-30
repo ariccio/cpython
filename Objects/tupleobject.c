@@ -224,7 +224,7 @@ PyTuple_Pack(Py_ssize_t n, ...)
 /* Methods */
 
 static void
-tupledealloc(_In_ _Post_invalid_ _Post_ptr_invalid_ PyTupleObject *op)
+tupledealloc(_Post_ptr_invalid_ PyTupleObject *op)
 {
     Py_ssize_t i;
     Py_ssize_t len =  Py_SIZE(op);

@@ -24,7 +24,7 @@ typedef struct {
 
 
 static void
-simplequeue_dealloc(_In_ _Post_invalid_ _Post_ptr_invalid_ simplequeueobject *self)
+simplequeue_dealloc(_Post_ptr_invalid_ simplequeueobject *self)
 {
     PyObject_GC_UnTrack(self);
     if (self->lock != NULL) {

@@ -340,7 +340,7 @@ iobase_clear(iobase *self)
 /* Destructor */
 
 static void
-iobase_dealloc(_In_ _Post_invalid_ _Post_ptr_invalid_ iobase *self)
+iobase_dealloc(_Post_ptr_invalid_ iobase *self)
 {
     /* NOTE: since IOBaseObject has its own dict, Python-defined attributes
        are still available here for close() to use.

@@ -2272,7 +2272,7 @@ PySSL_clear(PySSLSocket *self)
 }
 
 static void
-PySSL_dealloc(_In_ _Post_invalid_ _Post_ptr_invalid_ PySSLSocket *self)
+PySSL_dealloc(_Post_ptr_invalid_ PySSLSocket *self)
 {
     if (self->ssl)
         SSL_free(self->ssl);
@@ -3283,7 +3283,7 @@ context_clear(PySSLContext *self)
 }
 
 static void
-context_dealloc(_In_ _Post_invalid_ _Post_ptr_invalid_ _At_(self->ctx, _In_ _Post_invalid_ _Post_ptr_invalid_ ) _At_(self->alpn_protocols, _In_ _Post_invalid_ _Post_ptr_invalid_ ) PySSLContext *self)
+context_dealloc(_Post_ptr_invalid_ _At_(self->ctx, _Post_ptr_invalid_ ) _At_(self->alpn_protocols, _Post_ptr_invalid_ ) PySSLContext *self)
 {
     /* bpo-31095: UnTrack is needed before calling any callbacks */
     PyObject_GC_UnTrack(self);
@@ -4866,7 +4866,7 @@ _ssl_MemoryBIO_impl(PyTypeObject *type)
 }
 
 static void
-memory_bio_dealloc(_In_ _Post_invalid_ _Post_ptr_invalid_ PySSLMemoryBIO *self)
+memory_bio_dealloc(_Post_ptr_invalid_ PySSLMemoryBIO *self)
 {
     BIO_free(self->bio);
     Py_TYPE(self)->tp_free(self);

@@ -72,7 +72,7 @@ static int pysqlite_cursor_init(pysqlite_Cursor* self, PyObject* args, PyObject*
     return 0;
 }
 
-static void pysqlite_cursor_dealloc(_In_ _Post_invalid_ _Post_ptr_invalid_ pysqlite_Cursor* self)
+static void pysqlite_cursor_dealloc(_Post_ptr_invalid_ pysqlite_Cursor* self)
 {
     /* Reset the statement if the user has not closed the cursor */
     if (self->statement) {

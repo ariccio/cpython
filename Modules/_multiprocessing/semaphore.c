@@ -513,7 +513,7 @@ semlock_rebuild(PyTypeObject *type, PyObject *args)
 }
 
 static void
-semlock_dealloc(_In_ _Post_invalid_ _Post_ptr_invalid_ _At_(self->name, _In_ _Post_invalid_ _Post_ptr_invalid_ ) SemLockObject* self)
+semlock_dealloc(_Post_ptr_invalid_ _At_(self->name, _Post_ptr_invalid_ ) SemLockObject* self)
 {
     if (self->handle != SEM_FAILED)
         SEM_CLOSE(self->handle);

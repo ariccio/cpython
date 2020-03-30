@@ -744,7 +744,7 @@ get_locale_info(enum LocaleType type, LocaleInfo *locale_info)
 }
 
 static void
-free_locale_info(_At_(locale_info->grouping_buffer, _In_ _Post_invalid_ _Post_ptr_invalid_ ) LocaleInfo *locale_info)
+free_locale_info(_At_(locale_info->grouping_buffer, _Post_ptr_invalid_ ) LocaleInfo *locale_info)
 {
     Py_XDECREF(locale_info->decimal_point);
     Py_XDECREF(locale_info->thousands_sep);

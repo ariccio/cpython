@@ -269,7 +269,7 @@ _io_IncrementalNewlineDecoder___init___impl(nldecoder_object *self,
 }
 
 static void
-incrementalnewlinedecoder_dealloc(_In_ _Post_invalid_ _Post_ptr_invalid_ nldecoder_object *self)
+incrementalnewlinedecoder_dealloc(_Post_ptr_invalid_ nldecoder_object *self)
 {
     Py_CLEAR(self->decoder);
     Py_CLEAR(self->errors);
@@ -1427,7 +1427,7 @@ textiowrapper_clear(textio *self)
 }
 
 static void
-textiowrapper_dealloc(_In_ _Post_invalid_ _Post_ptr_invalid_ textio *self)
+textiowrapper_dealloc(_Post_ptr_invalid_ textio *self)
 {
     self->finalizing = 1;
     if (_PyIOBase_finalize((PyObject *) self) < 0)

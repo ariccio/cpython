@@ -689,7 +689,7 @@ static struct PyMethodDef multibytecodec_methods[] = {
 };
 
 static void
-multibytecodec_dealloc(_In_ _Post_invalid_ _Post_ptr_invalid_ MultibyteCodecObject *self)
+multibytecodec_dealloc(_Post_ptr_invalid_ MultibyteCodecObject *self)
 {
     PyObject_Del(self);
 }
@@ -1063,7 +1063,7 @@ mbiencoder_traverse(MultibyteIncrementalEncoderObject *self,
 }
 
 static void
-mbiencoder_dealloc(_In_ _Post_invalid_ _Post_ptr_invalid_ MultibyteIncrementalEncoderObject *self)
+mbiencoder_dealloc(_Post_ptr_invalid_ MultibyteIncrementalEncoderObject *self)
 {
     PyObject_GC_UnTrack(self);
     ERROR_DECREF(self->errors);
@@ -1363,7 +1363,7 @@ mbidecoder_traverse(MultibyteIncrementalDecoderObject *self,
 }
 
 static void
-mbidecoder_dealloc(_In_ _Post_invalid_ _Post_ptr_invalid_ MultibyteIncrementalDecoderObject *self)
+mbidecoder_dealloc(_Post_ptr_invalid_ MultibyteIncrementalDecoderObject *self)
 {
     PyObject_GC_UnTrack(self);
     ERROR_DECREF(self->errors);
@@ -1709,7 +1709,7 @@ mbstreamreader_traverse(MultibyteStreamReaderObject *self,
 }
 
 static void
-mbstreamreader_dealloc(_In_ _Post_invalid_ _Post_ptr_invalid_ MultibyteStreamReaderObject *self)
+mbstreamreader_dealloc(_Post_ptr_invalid_ MultibyteStreamReaderObject *self)
 {
     PyObject_GC_UnTrack(self);
     ERROR_DECREF(self->errors);
@@ -1941,7 +1941,7 @@ mbstreamwriter_traverse(MultibyteStreamWriterObject *self,
 }
 
 static void
-mbstreamwriter_dealloc(_In_ _Post_invalid_ _Post_ptr_invalid_ MultibyteStreamWriterObject *self)
+mbstreamwriter_dealloc(_Post_ptr_invalid_ MultibyteStreamWriterObject *self)
 {
     PyObject_GC_UnTrack(self);
     ERROR_DECREF(self->errors);

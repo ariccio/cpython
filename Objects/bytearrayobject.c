@@ -1069,7 +1069,7 @@ bytearray_richcompare(PyObject *self, PyObject *other, int op)
 }
 
 static void
-bytearray_dealloc(_In_ _Post_invalid_ _Post_ptr_invalid_ PyByteArrayObject *self)
+bytearray_dealloc(_Post_ptr_invalid_ PyByteArrayObject *self)
 {
     if (self->ob_exports > 0) {
         PyErr_SetString(PyExc_SystemError,

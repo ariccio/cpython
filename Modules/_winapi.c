@@ -100,7 +100,7 @@ typedef struct {
 } OverlappedObject;
 
 static void
-overlapped_dealloc(_In_ _Post_invalid_ _Post_ptr_invalid_ OverlappedObject *self)
+overlapped_dealloc(_Post_ptr_invalid_ OverlappedObject *self)
 {
     DWORD bytes;
     int err = GetLastError();

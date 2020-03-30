@@ -376,7 +376,7 @@ PyAPI_FUNC(int) _PyObject_RealIsSubclass(PyObject *derived, PyObject *cls);
 
 PyAPI_FUNC(char *const *) _PySequence_BytesToCharpArray(PyObject* self);
 
-PyAPI_FUNC(void) _Py_FreeCharPArray(_In_ _Post_invalid_ _Post_ptr_invalid_ _Null_terminated_ _At_buffer_(array, _Iter_, array[_Iter_] != NULL, _Null_terminated_ _In_ _Post_invalid_ _Post_ptr_invalid_)char *const array[]);
+PyAPI_FUNC(void) _Py_FreeCharPArray(_Post_ptr_invalid_ _Null_terminated_ _At_buffer_(array, _Iter_, array[_Iter_] != NULL, _Null_terminated_ _In_ _Post_invalid_ _Post_ptr_invalid_)char *const array[]);
 
 /* For internal use by buffer API functions */
 PyAPI_FUNC(void) _Py_add_one_to_index_F(int nd, Py_ssize_t *index,

@@ -142,7 +142,7 @@ newblock(void) {
 }
 
 static void
-freeblock(_In_ _Post_invalid_ _Post_ptr_invalid_ block *b)
+freeblock(_Post_ptr_invalid_ block *b)
 {
     if (numfreeblocks < MAXFREEBLOCKS) {
         freeblocks[numfreeblocks] = b;
@@ -1282,7 +1282,7 @@ deque_ass_item(dequeobject *deque, Py_ssize_t i, PyObject *v)
 }
 
 static void
-deque_dealloc(_In_ _Post_invalid_ _Post_ptr_invalid_ dequeobject *deque)
+deque_dealloc(_Post_ptr_invalid_ dequeobject *deque)
 {
     PyObject_GC_UnTrack(deque);
     if (deque->weakreflist != NULL)
@@ -2085,7 +2085,7 @@ static PyMemberDef defdict_members[] = {
 };
 
 static void
-defdict_dealloc(_In_ _Post_invalid_ _Post_ptr_invalid_ defdictobject *dd)
+defdict_dealloc(_Post_ptr_invalid_ defdictobject *dd)
 {
     /* bpo-31095: UnTrack is needed before calling any callbacks */
     PyObject_GC_UnTrack(dd);
@@ -2476,7 +2476,7 @@ tuplegetter_clear(PyObject *self)
 }
 
 static void
-tuplegetter_dealloc(_In_ _Post_invalid_ _Post_ptr_invalid_ _tuplegetterobject *self)
+tuplegetter_dealloc(_Post_ptr_invalid_ _tuplegetterobject *self)
 {
     PyObject_GC_UnTrack(self);
     tuplegetter_clear((PyObject*)self);

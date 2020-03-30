@@ -458,7 +458,7 @@ newSHA512object(void)
 /* Internal methods for a hash object */
 
 static void
-SHA512_dealloc(_In_ _Post_invalid_ _Post_ptr_invalid_ PyObject *ptr)
+SHA512_dealloc(_Post_ptr_invalid_ PyObject *ptr)
 {
     PyObject_Del(ptr);
 }

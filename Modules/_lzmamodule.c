@@ -775,7 +775,7 @@ Compressor_init(Compressor *self, PyObject *args, PyObject *kwargs)
 }
 
 static void
-Compressor_dealloc(_In_ _Post_invalid_ _Post_ptr_invalid_ Compressor *self)
+Compressor_dealloc(_Post_ptr_invalid_ Compressor *self)
 {
     lzma_end(&self->lzs);
     if (self->lock != NULL)
@@ -1220,7 +1220,7 @@ error:
 }
 
 static void
-Decompressor_dealloc(_In_ _Post_invalid_ _Post_ptr_invalid_ _At_(self->input_buffer, _In_ _Post_invalid_ _Post_ptr_invalid_ ) _At_(self->lock, _In_ _Post_invalid_ _Post_ptr_invalid_ ) Decompressor *self)
+Decompressor_dealloc(_Post_ptr_invalid_ _At_(self->input_buffer, _Post_ptr_invalid_ ) _At_(self->lock, _Post_ptr_invalid_ ) Decompressor *self)
 {
     if(self->input_buffer != NULL)
         PyMem_Free(self->input_buffer);

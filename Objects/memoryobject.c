@@ -127,7 +127,7 @@ mbuf_release(_PyManagedBufferObject *self)
 }
 
 static void
-mbuf_dealloc(_In_ _Post_invalid_ _Post_ptr_invalid_  _At_(self->master.format, _In_ _Post_invalid_ _Post_ptr_invalid_ ) _PyManagedBufferObject *self)
+mbuf_dealloc(_Post_ptr_invalid_  _At_(self->master.format, _Post_ptr_invalid_ ) _PyManagedBufferObject *self)
 {
     assert(self->exports == 0);
     mbuf_release(self);
@@ -1936,7 +1936,7 @@ unpacker_new(void)
 }
 
 static void
-unpacker_free(_In_ _Post_invalid_ _Post_ptr_invalid_  _At_(x->item, _In_ _Post_invalid_ _Post_ptr_invalid_ ) struct unpacker *x)
+unpacker_free(_Post_ptr_invalid_  _At_(x->item, _Post_ptr_invalid_ ) struct unpacker *x)
 {
     if (x) {
         Py_XDECREF(x->unpack_from);

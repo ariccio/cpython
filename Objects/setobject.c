@@ -552,7 +552,7 @@ set_next(PySetObject *so, Py_ssize_t *pos_ptr, setentry **entry_ptr)
 }
 
 static void
-set_dealloc(_In_ _Post_invalid_ _Post_ptr_invalid_ PySetObject *so)
+set_dealloc(_Post_ptr_invalid_ PySetObject *so)
 {
     setentry *entry;
     Py_ssize_t used = so->used;

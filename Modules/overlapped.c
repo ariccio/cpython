@@ -615,7 +615,7 @@ Overlapped_clear(OverlappedObject *self)
 }
 
 static void
-Overlapped_dealloc(_In_ _Post_invalid_ _Post_ptr_invalid_ OverlappedObject *self)
+Overlapped_dealloc(_Post_ptr_invalid_ OverlappedObject *self)
 {
     DWORD bytes;
     DWORD olderr = GetLastError();

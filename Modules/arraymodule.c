@@ -651,7 +651,7 @@ ins1(arrayobject *self, Py_ssize_t where, PyObject *v)
 /* Methods */
 
 static void
-array_dealloc(_In_ _Post_invalid_ _Post_ptr_invalid_ arrayobject *op)
+array_dealloc(_Post_ptr_invalid_ arrayobject *op)
 {
     if (op->weakreflist != NULL)
         PyObject_ClearWeakRefs((PyObject *) op);

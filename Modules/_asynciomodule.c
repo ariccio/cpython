@@ -1427,7 +1427,7 @@ static PyGetSetDef FutureType_getsetlist[] = {
     {NULL} /* Sentinel */
 };
 
-static void FutureObj_dealloc(_In_ _Post_invalid_ _Post_ptr_invalid_ PyObject *self);
+static void FutureObj_dealloc(_Post_ptr_invalid_ PyObject *self);
 
 static PyTypeObject FutureType = {
     PyVarObject_HEAD_INIT(NULL, 0)
@@ -1451,7 +1451,7 @@ static PyTypeObject FutureType = {
 };
 
 static void
-FutureObj_dealloc(_In_ _Post_invalid_ _Post_ptr_invalid_ PyObject *self)
+FutureObj_dealloc(_Post_ptr_invalid_ PyObject *self)
 {
     FutureObj *fut = (FutureObj *)self;
 
@@ -1694,7 +1694,7 @@ TaskStepMethWrapper_clear(TaskStepMethWrapper *o)
 }
 
 static void
-TaskStepMethWrapper_dealloc(_In_ _Post_invalid_ _Post_ptr_invalid_ TaskStepMethWrapper *o)
+TaskStepMethWrapper_dealloc(_Post_ptr_invalid_ TaskStepMethWrapper *o)
 {
     PyObject_GC_UnTrack(o);
     (void)TaskStepMethWrapper_clear(o);
@@ -1808,7 +1808,7 @@ TaskWakeupMethWrapper_traverse(TaskWakeupMethWrapper *o,
 }
 
 static void
-TaskWakeupMethWrapper_dealloc(_In_ _Post_invalid_ _Post_ptr_invalid_ TaskWakeupMethWrapper *o)
+TaskWakeupMethWrapper_dealloc(_Post_ptr_invalid_ TaskWakeupMethWrapper *o)
 {
     PyObject_GC_UnTrack(o);
     (void)TaskWakeupMethWrapper_clear(o);
@@ -2459,7 +2459,7 @@ task_cls_getitem(PyObject *cls, PyObject *type)
     return cls;
 }
 
-static void TaskObj_dealloc(_In_ _Post_invalid_ _Post_ptr_invalid_ PyObject *);  /* Needs Task_CheckExact */
+static void TaskObj_dealloc(_Post_ptr_invalid_ PyObject *);  /* Needs Task_CheckExact */
 
 static PyMethodDef TaskType_methods[] = {
     _ASYNCIO_FUTURE_RESULT_METHODDEF
@@ -2516,7 +2516,7 @@ static PyTypeObject TaskType = {
 };
 
 static void
-TaskObj_dealloc(_In_ _Post_invalid_ _Post_ptr_invalid_ PyObject *self)
+TaskObj_dealloc(_Post_ptr_invalid_ PyObject *self)
 {
     TaskObj *task = (TaskObj *)self;
 

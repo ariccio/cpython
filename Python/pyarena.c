@@ -89,7 +89,7 @@ block_new(size_t size)
 }
 
 static void
-block_free(_In_ _Post_invalid_ _Post_ptr_invalid_ block *b) {
+block_free(_Post_ptr_invalid_ block *b) {
     while (b) {
         block *next = b->ab_next;
         PyMem_Free(b);
@@ -154,7 +154,7 @@ PyArena_New()
 }
 
 void
-PyArena_Free(_In_ _Post_invalid_ _Post_ptr_invalid_ PyArena *arena)
+PyArena_Free(_Post_ptr_invalid_ PyArena *arena)
 {
     assert(arena);
 #if defined(Py_DEBUG)

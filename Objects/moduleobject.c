@@ -657,7 +657,7 @@ module___init___impl(PyModuleObject *self, PyObject *name, PyObject *doc)
 }
 
 static void
-module_dealloc(_In_ _Post_invalid_ _Post_ptr_invalid_ _At_(m->md_state, _In_ _Post_invalid_ _Post_ptr_invalid_ ) _When_(m->md_def&& m->md_def->m_free&& (m->md_def->m_size <= 0 || m->md_state != NULL), _In_ _Post_invalid_ _Post_ptr_invalid_) PyModuleObject *m)
+module_dealloc(_Post_ptr_invalid_ _At_(m->md_state, _Post_ptr_invalid_ ) _When_(m->md_def&& m->md_def->m_free&& (m->md_def->m_size <= 0 || m->md_state != NULL), _In_ _Post_invalid_ _Post_ptr_invalid_) PyModuleObject *m)
 {
     int verbose = _PyInterpreterState_GET_UNSAFE()->config.verbose;
 

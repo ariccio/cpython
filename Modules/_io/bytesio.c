@@ -884,7 +884,7 @@ bytesio_setstate(bytesio *self, PyObject *state)
 }
 
 static void
-bytesio_dealloc(_In_ _Post_invalid_ _Post_ptr_invalid_ bytesio *self)
+bytesio_dealloc(_Post_ptr_invalid_ bytesio *self)
 {
     _PyObject_GC_UNTRACK(self);
     if (self->exports > 0) {
@@ -1111,7 +1111,7 @@ bytesiobuf_traverse(bytesiobuf *self, visitproc visit, void *arg)
 }
 
 static void
-bytesiobuf_dealloc(_In_ _Post_invalid_ _Post_ptr_invalid_ bytesiobuf *self)
+bytesiobuf_dealloc(_Post_ptr_invalid_ bytesiobuf *self)
 {
     /* bpo-31095: UnTrack is needed before calling any callbacks */
     PyObject_GC_UnTrack(self);

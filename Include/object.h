@@ -176,8 +176,8 @@ typedef int (*visitproc)(PyObject *, void *);
 typedef int (*traverseproc)(PyObject *, visitproc, void *);
 
 
-typedef void (*freefunc)(_In_ _Post_invalid_ _Post_ptr_invalid_ void *);
-typedef void (*destructor)(_In_ _Post_invalid_ _Post_ptr_invalid_ PyObject *);
+typedef void (*freefunc)(_Post_ptr_invalid_ void *);
+typedef void (*destructor)(_Post_ptr_invalid_ PyObject *);
 typedef PyObject *(*getattrfunc)(PyObject *, char *);
 typedef PyObject *(*getattrofunc)(PyObject *, PyObject *);
 typedef int (*setattrfunc)(PyObject *, char *, PyObject *);
@@ -393,7 +393,7 @@ PyAPI_FUNC(void) _Py_NegativeRefcount(const char *filename, int lineno,
                                       PyObject *op);
 #endif /* Py_REF_DEBUG */
 
-PyAPI_FUNC(void) _Py_Dealloc(_In_ _Post_invalid_ _Post_ptr_invalid_ PyObject *);
+PyAPI_FUNC(void) _Py_Dealloc(_Post_ptr_invalid_ PyObject *);
 
 _Post_satisfies_(op->ob_refcnt == (_Old_(op->ob_refcnt) + 1))
 static inline void _Py_INCREF(PyObject *op)
@@ -406,7 +406,7 @@ static inline void _Py_INCREF(PyObject *op)
 
 #define Py_INCREF(op) _Py_INCREF(_PyObject_CAST(op))
 
-_When_(_Pre_(op->ob_refcnt == 1), _At_(op, _In_ _Post_invalid_ _Post_ptr_invalid_))
+_At_(op, _When_(_Pre_(op->ob_refcnt == 1), _In_ _Post_invalid_ _Post_ptr_invalid_))
 static inline void _Py_DECREF(
 #ifdef Py_REF_DEBUG
     const char *filename, int lineno,

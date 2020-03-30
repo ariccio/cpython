@@ -1168,7 +1168,7 @@ hamt_node_bitmap_traverse(PyHamtNode_Bitmap *self, visitproc visit, void *arg)
 }
 
 static void
-hamt_node_bitmap_dealloc(_In_ _Post_invalid_ _Post_ptr_invalid_ PyHamtNode_Bitmap *self)
+hamt_node_bitmap_dealloc(_Post_ptr_invalid_ PyHamtNode_Bitmap *self)
 {
     /* Bitmap's tp_dealloc */
 
@@ -1577,7 +1577,7 @@ hamt_node_collision_traverse(PyHamtNode_Collision *self,
 }
 
 static void
-hamt_node_collision_dealloc(_In_ _Post_invalid_ _Post_ptr_invalid_ PyHamtNode_Collision *self)
+hamt_node_collision_dealloc(_Post_ptr_invalid_ PyHamtNode_Collision *self)
 {
     /* Collision's tp_dealloc */
 
@@ -1962,7 +1962,7 @@ hamt_node_array_traverse(PyHamtNode_Array *self,
 }
 
 static void
-hamt_node_array_dealloc(_In_ _Post_invalid_ _Post_ptr_invalid_ PyHamtNode_Array *self)
+hamt_node_array_dealloc(_Post_ptr_invalid_ PyHamtNode_Array *self)
 {
     /* Array's tp_dealloc */
 
@@ -2730,7 +2730,7 @@ hamt_tp_traverse(PyHamtObject *self, visitproc visit, void *arg)
 }
 
 static void
-hamt_tp_dealloc(_In_ _Post_invalid_ _Post_ptr_invalid_ PyHamtObject *self)
+hamt_tp_dealloc(_Post_ptr_invalid_ PyHamtObject *self)
 {
     PyObject_GC_UnTrack(self);
     if (self->h_weakreflist != NULL) {

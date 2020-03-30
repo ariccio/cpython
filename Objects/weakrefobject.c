@@ -102,7 +102,7 @@ _PyWeakref_ClearRef(PyWeakReference *self)
 }
 
 static void
-weakref_dealloc(_In_ _Post_invalid_ _Post_ptr_invalid_ PyObject *self)
+weakref_dealloc(_Post_ptr_invalid_ PyObject *self)
 {
     PyObject_GC_UnTrack(self);
     clear_weakref((PyWeakReference *) self);

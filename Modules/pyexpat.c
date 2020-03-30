@@ -1158,7 +1158,7 @@ newxmlparseobject(const char *encoding, const char *namespace_separator, PyObjec
 
 
 static void
-xmlparse_dealloc(_In_ _Post_invalid_ _Post_ptr_invalid_  _At_(self->handlers, _In_ _Post_invalid_ _Post_ptr_invalid_ ) _At_(self->buffer, _In_ _Post_invalid_ _Post_ptr_invalid_ ) xmlparseobject *self)
+xmlparse_dealloc(_Post_ptr_invalid_  _At_(self->handlers, _Post_ptr_invalid_ ) _At_(self->buffer, _Post_ptr_invalid_ ) xmlparseobject *self)
 {
     int i;
     PyObject_GC_UnTrack(self);

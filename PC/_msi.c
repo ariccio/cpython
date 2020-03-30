@@ -279,7 +279,7 @@ typedef struct msiobj{
 }msiobj;
 
 static void
-msiobj_dealloc(_In_ _Post_invalid_ _Post_ptr_invalid_ msiobj* msidb)
+msiobj_dealloc(_Post_ptr_invalid_ msiobj* msidb)
 {
     MsiCloseHandle(msidb->h);
     msidb->h = 0;

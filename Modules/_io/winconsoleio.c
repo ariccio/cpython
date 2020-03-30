@@ -432,7 +432,7 @@ winconsoleio_clear(winconsoleio *self)
 }
 
 static void
-winconsoleio_dealloc(_In_ _Post_invalid_ _Post_ptr_invalid_ winconsoleio *self)
+winconsoleio_dealloc(_Post_ptr_invalid_ winconsoleio *self)
 {
     self->finalizing = 1;
     if (_PyIOBase_finalize((PyObject *) self) < 0)
